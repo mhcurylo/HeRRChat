@@ -1,0 +1,33 @@
+{
+  "name": "rrchatclient",
+  "version": "0.0.1",
+  "description": "A client app for RRChat",
+  "main": "no",
+  "scripts": {
+    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js 'test/**/*.@(js|jsx)'",
+    "test:watch": "npm run test -- --watch"
+  },
+  "author": "Mateusz Curyło",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.2.1",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.1.18",
+    "chai": "^3.4.1",
+    "chai-immutable": "^1.5.3",
+    "jsdom": "^7.0.2",
+    "mocha": "^2.3.4",
+    "webpack": "^1.12.8",
+    "webpack-dev-server": "^1.12.1"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react"
+    ]
+  },
+  "dependencies": {
+    "immutable": "^3.7.5"
+  }
+}
