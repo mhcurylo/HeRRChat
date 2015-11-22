@@ -14,31 +14,37 @@ const example = fromJS({
 			sources: []
 		}
 	},
+	signalsBySpace: {
+		'/': ['0', '1'],
+		'/rooby': []
+	},
+	spacesLast: ['/', '/rooby'],
+	sourcesLast: ['Kazio', 'Józek'],
 	signals:{
-		'/': [{
+		'0': {
+			id: '0',
 			source: 'Kazio',
 			signal: 'Woooohussss',
 			space: '/'
-		}, {
+		},
+		'1': {
+			id: '1',
 			source: 'Kazio',
 			signal: 'Cohaus',
 			space: '/'
-		}],
-		'/rooby': [{
-
-		}]
+		}
 	},
 	sources: {
 		'Kazio': {
 			id: 'Kazio',
 			space: '/'
+		},
+		'Józek': {
+			id: 'Józek',
+			space: '/'
 		}
 	},
-	user: {
-		spaces: ['/', '/rooby'],
-		space: '/',
-		id: 'PrawdziwyKazio'
-	},
+	name: 'PrawdziwyKazio',
 	url: '/',
 	noise: 'Cos tam pisze'
 })
