@@ -3,7 +3,7 @@ import {addToSpace, removeFromSpace} from './space';
 import {newMessage} from './msg';
 import {INITIAL_STATE} from './initial';
 
-export function reducer (state=INITIAL_STATE, action)  {
+export default function reducer (state=INITIAL_STATE, action)  {
     switch (action.type) {
     case 'LOGIN_USER':
         return state.update('users', users => loginUser(users, action.user));

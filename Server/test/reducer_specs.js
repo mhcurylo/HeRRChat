@@ -1,7 +1,7 @@
 import {List, Map, Set, fromJS} from 'immutable';
 import {expect} from 'chai';
 
-import {reducer} from '../src/reducer';
+import reducer from '../src/reducer';
 import {INITIAL_STATE} from '../src/initial';
 
 describe('Reduce works', () => {
