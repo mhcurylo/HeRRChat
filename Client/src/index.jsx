@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {fromJS} from 'immutable';
 import Chat from './components/Chat';
 
+
 const example = fromJS({
 	spaces: {
 		'/': {

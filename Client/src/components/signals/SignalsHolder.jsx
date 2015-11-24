@@ -4,7 +4,7 @@ import SingleSignal from './SingleSignal';
 export default React.createClass({
 	render: function() {
 
-		return <div className="signalsHolder">
+		return <div className="chat__element chat__signals">
 			<h4>Signals</h4>
 			{this.props.signalsBySpace.map(signal => 
 					<SingleSignal signal={

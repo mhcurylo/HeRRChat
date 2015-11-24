@@ -3,6 +3,7 @@ import SignalsHolder from './signals/SignalsHolder';
 import SpacesHolder from './spaces/SpacesHolder';
 import SourcesHolder from './sources/SourcesHolder';
 import SignalingPad from './signaling/SignalingPad';
+import './chat.styl';
 
 export default React.createClass({
   render: function() {

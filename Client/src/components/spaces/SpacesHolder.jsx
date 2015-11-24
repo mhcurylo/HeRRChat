@@ -3,7 +3,7 @@ import SingleSpace from './SingleSpace';
 
 export default React.createClass({
 	render: function() {
-		return <div className="spacesHolder">
+		return <div className="chat__element chat__spaces">
 		<h4>Spaces</h4>
 			{this.props.spacesLast.map(space =>
 				 <SingleSpace key={space} 
