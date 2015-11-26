@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var jeet = require('jeet');
+var axis = axis = require('axis');
 
 module.exports = {
   entry: [
@@ -18,7 +19,7 @@ module.exports = {
   ]
   },
   stylus: {
-  use: [jeet()]
+  use: [jeet(), axis()]
   },
   resolve: {
     extensions: ['', '.js', '.jsx']

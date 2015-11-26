@@ -3,23 +3,22 @@ import ReactDOM from 'react-dom';
 import {fromJS} from 'immutable';
 import Chat from './components/Chat';
 
-
 const example = fromJS({
 	spaces: {
 		'/': {
 			id: '/',
 			sources: ['Kazio', 'Józek']
 		},
-		'/rooby': {
-			id: '/rooby',
+		'/uuuu': {
+			id: '/uuuu',
 			sources: []
 		}
 	},
 	signalsBySpace: {
 		'/': ['0', '1'],
-		'/rooby': []
+		'/uuuu': []
 	},
-	spacesLast: ['/', '/rooby'],
+	spacesLast: ['/', '/uuuu'],
 	sourcesLast: ['Kazio', 'Józek'],
 	signals:{
 		'0': {
@@ -47,11 +46,14 @@ const example = fromJS({
 	},
 	name: 'PrawdziwyKazio',
 	url: '/',
-	noise: 'Cos tam pisze'
+	noise: 'Cos tam sszess',
+	action: 'go'
 })
 
+example.set('noise', 'sssssk');
+
 ReactDOM.render(
-  <Chat chatData={example} />,
+  <Chat chatData={example.set('noise', 'sssssk')} />,
   document.getElementById('rrchc')
 );
 
