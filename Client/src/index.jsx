@@ -24,7 +24,7 @@ const example = fromJS({
 		'0': {
 			id: '0',
 			source: 'Kazio',
-			signal: 'Woooohussss',
+			signal: 'Woooohussss. Ich moochte Deustsche schreiben, aber meinen Tastatur ist Polnish und ich weiss nich wie man Deutsch spriechst.',
 			space: '/'
 		},
 		'1': {
