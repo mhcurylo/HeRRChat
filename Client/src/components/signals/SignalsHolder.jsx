@@ -10,7 +10,7 @@ export default React.createClass({
 		return <div className="chat__element chat__signals">
 			<h4>Signals</h4> 
 			{this.props.signalsBySpace.map(signal => 
-					<SingleSignal signal={
+					<SingleSignal key={signal} signal={
 						this.props.signals.get(signal)}/>)}
 		</div>;
 	}
