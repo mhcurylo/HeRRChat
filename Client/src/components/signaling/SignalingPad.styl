@@ -3,6 +3,8 @@
 
 textarea
 	resize 			none
+	border			base03 solid 0.4rem
+	transition()
 	
 .SignalingPad_column
 	span(1/2)
@@ -28,6 +30,8 @@ textarea
 	height 			4rem
 	background 		base03
 	color 			base2
-	border			orange solid 0.1rem
-	padding			0.4rem
-	margin 			0.2rem
+//	border			orange solid 0.1rem
+	&:focus			
+		outline 	none
+//		border		base2
+		transition()
