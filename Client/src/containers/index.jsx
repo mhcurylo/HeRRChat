@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {fromJS} from 'immutable';
 import Router, {Route}  from 'react-router';
-import App from './components/App';
-import Chat from './components/Chat';
+import App from '../components/App';
+import Chat from '../components/Chat';
 
 const routes = <Route component={App}>
   <Route path="*" component={Chat} />

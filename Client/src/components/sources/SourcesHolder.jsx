@@ -9,10 +9,10 @@ export default React.createClass({
 		return <div className="chat__element chat__sources">
 			<h4>Sources</h4>
 			<ul className="sources">
-			{this.props.sourcesLast.map(source =>
-				 <SingleSource key={source} 
-				 	sisource={this.props.sources.get(source)}
-				 	url={this.props.url}/>)}
+				{this.props.sourcesOrder.map(source =>
+					 <SingleSource key={source} 
+					 	sisource={this.props.sources.get(source)}
+					 	url={this.props.url}/>)}
 			</ul>
 		</div>;
 	}

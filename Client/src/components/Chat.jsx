@@ -12,17 +12,16 @@ export default React.createClass({
         return <div className="chat">
         	<SignalsHolder 
         		signals={this.props.chatData.get('signals')} 
-        		signalsBySpace={this.props.chatData.getIn([
-        			'signalsBySpace', this.props.chatData.get('url')])}/>
+        		signalsFiltered={this.props.chatData.get('signalsFiltered')}/>
         	<SpacesHolder
         		spaces={this.props.chatData.get('spaces')} 
-        		spacesLast={this.props.chatData.get('spacesLast')}
+        		spacesOrder={this.props.chatData.get('spacesOrder')}
         		url={this.props.chatData.get('url')}/>
         	<SourcesHolder
         		sources={this.props.chatData.get('sources')}
-        		sourcesLast = {this.props.chatData.get('sourcesLast')}
+        		sourcesOrder = {this.props.chatData.get('sourcesOrder')}
         		url={this.props.chatData.get('url')}/>
-        	<SignalingPad noise={this.props.chatData.get('noise')}/>
+        	<SignalingPad name = {this.props.chatData.get('name')} noise={this.props.chatData.get('noise')}/>
         </div>;
 }
 });

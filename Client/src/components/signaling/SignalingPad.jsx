@@ -8,7 +8,8 @@ export default React.createClass({
 	render: function() {
 	    return <div className="chat__element chat__signalingPad">
 		    <div className="SignalingPad_column">
-			    <h4>Sender</h4>
+			    <h4>{this.props.name ||
+			    	'Enter your name and broadcast it.'}</h4>
 			</div>
 		    <div className="SignalingPad_column">
 			    <button className="signalingPad__action">broadcast</button>
