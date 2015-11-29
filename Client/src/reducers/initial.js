@@ -3,38 +3,30 @@ import {fromJS} from 'immutable';
 export const INITIAL_STATE = fromJS({
 	spaces: {
 	},
-	signalsFiltered: [],
-	signalsOrder: [],
-	spacesOrder: [],
-	sourcesOrder: [],
 	signals:{
 	},
 	sources: {
 	},
 	name: '',
+	signalsFiltered: [],
+	signalsOrder: [],
+	spacesOrder: [],
+	sourcesOrder: [],
 	url: '/',
 	noise: '',
 	action: ''
 })
 
-
-
-
-
 // const example = fromJS({
 // 	spaces: {
 // 		'/': {
 // 			id: '/',
-// 			sources: ['Kazio', 'Józek']
+// 			sources: {'Kazio', 'Józek'}
 // 		},
 // 		'/uuuu': {
 // 			id: '/uuuu',
 // 			sources: []
 // 		}
-// 	},
-// 	signalsBySpace: {
-// 		'/': ['0', '1'],
-// 		'/uuuu': ['1']
 // 	},
 // 	spacesOrder: ['/', '/uuuu'],
 // 	sourcesOrder: ['Kazio', 'Józek'],

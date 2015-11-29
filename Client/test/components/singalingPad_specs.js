@@ -5,7 +5,7 @@ import {expect} from 'chai';
 const {renderIntoDocument, scryRenderedDOMComponentsWithTag}
   = React.addons.TestUtils;
 
-describe('Signaling pad element', () => {
+describe('Signals holder...', () => {
 
   it('Well-behaves on no input,', () => {
     const component = renderIntoDocument(
@@ -18,7 +18,7 @@ describe('Signaling pad element', () => {
     expect(textarea[0].textContent).to.equal('');
   });
 
-  it('isplays name and noise...', () => {
+  it('...displays name and noise...', () => {
     const component = renderIntoDocument(
       <SignalingPad name='Kapusta' noise='Kiszona'/> 
     );
@@ -28,7 +28,7 @@ describe('Signaling pad element', () => {
     expect(textarea[0].textContent).to.equal('Kiszona');
   });
 
-   it('...and also has buttons', () => {
+   it('...and also has buttons.', () => {
     const component = renderIntoDocument(
       <SignalingPad name='' noise=''/> 
     );
