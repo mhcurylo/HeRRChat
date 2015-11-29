@@ -4,24 +4,44 @@ import SpacesHolder from './spaces/SpacesHolder';
 import SourcesHolder from './sources/SourcesHolder';
 import SignalingPad from './signaling/SignalingPad';
 import './chat.styl';
+import {connect} from 'react-redux';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+import * as actionCreators from '../actions/actions.js';
 
-export default React.createClass({
+
+const Chat = React.createClass({
     mixins: [PureRenderMixin],
     render: function() {
         return <div className="chat">
-        	<SignalsHolder 
-        		signals={this.props.chatData.get('signals')} 
-        		signalsFiltered={this.props.chatData.get('signalsFiltered')}/>
-        	<SpacesHolder
-        		spaces={this.props.chatData.get('spaces')} 
-        		spacesOrder={this.props.chatData.get('spacesOrder')}
-        		url={this.props.chatData.get('url')}/>
-        	<SourcesHolder
-        		sources={this.props.chatData.get('sources')}
-        		sourcesOrder = {this.props.chatData.get('sourcesOrder')}
-        		url={this.props.chatData.get('url')}/>
-        	<SignalingPad name = {this.props.chatData.get('name')} noise={this.props.chatData.get('noise')}/>
+            <SignalsHolder 
+                signals={this.props.signals} 
+                signalsFiltered={this.props.signalsFiltered}/>
+            <SpacesHolder
+                spaces={this.props.spaces} 
+                spacesOrder={this.props.spacesOrder}
+                url={this.props.url}/>
+            <SourcesHolder
+                sources={this.props.sources}
+                sourcesOrder = {this.props.sourcesOrder}
+                url={this.props.url}/>
+            <SignalingPad writePad = {this.props.writePad} name = {this.props.name} noise={this.props.noise}/>
         </div>;
 }
 });
+
+function mapStateToProps(state) {
+    return { 
+        signals: state.get('signals'),
+        signalsFiltered: state.get('signalsFiltered'),
+        spaces: state.get('spaces'),
+        spacesOrder: state.get('spacesOrder'),
+        url: state.get('url'),
+        sources: state.get('sources'),
+        sourcesOrder: state.get('sourcesOrder'),
+        name: state.get('name'),
+        noise: state.get('noise')
+    };
+}
+
+
+export const ChatContainer = connect(mapStateToProps, actionCreators)(Chat);

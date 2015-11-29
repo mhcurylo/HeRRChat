@@ -1,0 +1,1 @@
+export const WRITE_PAD = 'WRITE_PAD';

@@ -1,7 +1,7 @@
 import {List, Map, Set, fromJS} from 'immutable';
 import {expect} from 'chai';
 
-import {newMessage} from '../src/msg';
+import {newMessage} from '../src/functions/msg';
 
 describe('Messages', () => {
     

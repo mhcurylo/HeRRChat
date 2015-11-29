@@ -1,7 +1,7 @@
 import {List, Map, Set, fromJS} from 'immutable';
 import {expect} from 'chai';
 
-import {loginUser, logoutUser} from '../src/log';
+import {loginUser, logoutUser} from '../src/functions/log';
 
 describe('login', () => {
 

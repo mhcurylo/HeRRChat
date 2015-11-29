@@ -1,10 +1,16 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+import {connect} from 'react-redux';
+import {writePad} from '../../actions/actions.js';
+
 import './SignalingPad.styl'
+
 
 export default React.createClass({
 	mixins: [PureRenderMixin],
-
+	handleChange(e) {
+    	this.props.writePad(e.target.value);
+    },
 	render: function() {
 	    return <div className="chat__element chat__signalingPad">
 		    <div className="SignalingPad_column">
@@ -15,7 +21,10 @@ export default React.createClass({
 			    <button className="signalingPad__action">broadcast</button>
 			    <button className="signalingPad__action">go</button>
 			</div>
-				<textarea className="signalingPad__textArea" placeholder="Signal..." value={this.props.noise}/>
+				<textarea className="signalingPad__textArea" 
+					placeholder="Signal..." 
+					value={this.props.noise}
+					onChange={this.handleChange}/>
 		    </div>;
 	}
 });

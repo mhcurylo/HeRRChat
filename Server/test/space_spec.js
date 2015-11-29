@@ -1,7 +1,7 @@
 import {List, Map, Set} from 'immutable';
 import {expect} from 'chai';
 
-import {addToSpace, removeFromSpace} from '../src/space';
+import {addToSpace, removeFromSpace} from '../src/functions/space';
 
 describe('Space Movement', () => {
 

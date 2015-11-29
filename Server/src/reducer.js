@@ -1,6 +1,6 @@
-import {loginUser, logoutUser} from './log';
-import {addToSpace, removeFromSpace} from './space';
-import {newMessage} from './msg';
+import {loginUser, logoutUser} from './functions/log';
+import {addToSpace, removeFromSpace} from './functions/space';
+import {newMessage} from './functions/msg';
 import {INITIAL_STATE} from './initial';
 
 export default function reducer (state=INITIAL_STATE, action)  {
