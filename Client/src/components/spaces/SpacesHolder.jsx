@@ -10,9 +10,7 @@ export default React.createClass({
 			<h4>Spaces</h4>
 			<ul className="spaces">
 				{this.props.spacesOrder.map(space =>
-					 <SingleSpace key={space} 
-					 	space={this.props.spaces.get(space)}
-					 	url={this.props.url} 	/>)} 
+					 <SingleSpace key={space} space={space}/>)} 
 			</ul>
 		</div>;
 	}

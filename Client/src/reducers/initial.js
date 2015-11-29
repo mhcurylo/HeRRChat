@@ -1,18 +1,18 @@
-import {fromJS} from 'immutable';
+import {Map, OrderedSet, List, Set} from 'immutable';
 
-export const INITIAL_STATE = fromJS({
-	spaces: {
-	},
-	signals:{
-	},
-	sources: {
-	},
+export const INITIAL_STATE =Map({
+	spaces: Map({
+	}),
+	signals: Map({
+	}),
+	sources: Map({
+	}),
 	name: '',
-	signalsFiltered: [],
-	signalsOrder: [],
-	spacesOrder: [],
-	sourcesOrder: [],
-	url: '/',
+	signalsFiltered: List.of(),
+	signalsOrder: List.of(),
+	spacesOrder: OrderedSet.of(),
+	sourcesOrder: OrderedSet.of(),
+	url: '',
 	noise: '',
 	action: ''
 })

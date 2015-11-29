@@ -11,13 +11,16 @@ import * as actionCreators from '../actions/actions.js';
 
 const Chat = React.createClass({
     mixins: [PureRenderMixin],
+    componentDidMount: function () {
+        console.log(this.props.location.pathname);
+        this.props.changeUrl(this.props.location.pathname);
+    },
     render: function() {
         return <div className="chat">
             <SignalsHolder 
                 signals={this.props.signals} 
                 signalsFiltered={this.props.signalsFiltered}/>
             <SpacesHolder
-                spaces={this.props.spaces} 
                 spacesOrder={this.props.spacesOrder}
                 url={this.props.url}/>
             <SourcesHolder

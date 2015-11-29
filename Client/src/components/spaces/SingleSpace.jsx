@@ -6,8 +6,7 @@ export default React.createClass({
 	mixins: [PureRenderMixin],
   	render: function() {
 	    return 	<li className="space">
-		    	 {this.props.space.get('id')} 
+		    	 {this.props.space}
 	    	</li>;
-	 
   	}
 });

@@ -10,9 +10,7 @@ export default React.createClass({
 			<h4>Sources</h4>
 			<ul className="sources">
 				{this.props.sourcesOrder.map(source =>
-					 <SingleSource key={source} 
-					 	sisource={this.props.sources.get(source)}
-					 	url={this.props.url}/>)}
+					 <SingleSource source={source}/>)}
 			</ul>
 		</div>;
 	}

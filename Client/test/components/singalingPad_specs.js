@@ -5,7 +5,7 @@ import {expect} from 'chai';
 const {renderIntoDocument, scryRenderedDOMComponentsWithTag}
   = React.addons.TestUtils;
 
-describe('Signals holder...', () => {
+describe('SginalingPad...', () => {
 
   it('Well-behaves on no input,', () => {
     const component = renderIntoDocument(

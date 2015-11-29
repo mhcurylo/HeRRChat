@@ -6,7 +6,7 @@ import {writePad} from '../../src/actions/actions'
 
 describe('Action+Store+Reducer/Broadcasting', () => {
 
-  it('writePad creates noise.', () => {
+  it('/writePad/ creates noise.', () => {
 
     store.dispatch(writePad('myhmy'))
 
