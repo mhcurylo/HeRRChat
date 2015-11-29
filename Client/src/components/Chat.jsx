@@ -11,10 +11,6 @@ import * as actionCreators from '../actions/actions.js';
 
 const Chat = React.createClass({
     mixins: [PureRenderMixin],
-    componentDidMount: function () {
-        console.log(this.props.location.pathname);
-        this.props.changeUrl(this.props.location.pathname);
-    },
     render: function() {
         return <div className="chat">
             <SignalsHolder 
