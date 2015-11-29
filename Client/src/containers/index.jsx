@@ -8,7 +8,7 @@ import App from './App';
 import {ChatContainer} from '../components/Chat';
 
 store.dispatch({
-	type: 'WRITE_PAD',	noise: 'wrrrr'
+	type: 'WRITE_PAD',	noise: 'wrrrr \n wwwr \n wrrr \n  wrrrrrrrr \n wwwwr'
 });
 
 const routes = <Route component={App}>
