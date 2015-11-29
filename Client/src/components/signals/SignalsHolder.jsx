@@ -1,7 +1,7 @@
 import React from 'react';
 import SingleSignal from './SingleSignal';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import './Signals.styl'
+
 
 export default React.createClass({
 

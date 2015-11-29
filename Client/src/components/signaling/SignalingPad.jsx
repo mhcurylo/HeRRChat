@@ -3,8 +3,6 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
 import {writePad} from '../../actions/actions.js';
 
-import './SignalingPad.styl'
-
 
 export default React.createClass({
 	mixins: [PureRenderMixin],

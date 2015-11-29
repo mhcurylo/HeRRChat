@@ -1,7 +1,7 @@
 import React from 'react';
 import SingleSource from './SingleSource';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import './Sources.styl';
+
 
 export default React.createClass({
 	mixins: [PureRenderMixin],

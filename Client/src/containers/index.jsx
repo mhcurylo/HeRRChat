@@ -7,9 +7,7 @@ import {Router, Route}  from 'react-router';
 import App from './App';
 import {ChatContainer} from '../components/Chat';
 
-store.dispatch({
-	type: 'WRITE_PAD',	noise: 'wrrrr \n wwwr \n wrrr \n  wrrrrrrrr \n wwwwr'
-});
+
 
 const routes = <Route component={App}>
   <Route path="*" component={ChatContainer} />
@@ -21,6 +19,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('rrchc')
  );
-
-
-console.log('does it work?')
