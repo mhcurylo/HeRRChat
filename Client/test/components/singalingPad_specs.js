@@ -5,7 +5,7 @@ import {expect} from 'chai';
 const {renderIntoDocument, scryRenderedDOMComponentsWithTag}
   = React.addons.TestUtils;
 
-describe('SginalingPad...', () => {
+describe('SignalingPad...', () => {
 
   it('Well-behaves on no input,', () => {
     const component = renderIntoDocument(
@@ -28,15 +28,17 @@ describe('SginalingPad...', () => {
     expect(textarea[0].textContent).to.equal('Kiszona');
   });
 
-   it('...and also has buttons.', () => {
+   it('...and has a button.', () => {
     const component = renderIntoDocument(
       <SignalingPad name='' noise=''/> 
     );
     const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
 
-    expect(buttons.length).to.equal(2);
+    expect(buttons.length).to.equal(1);
     expect(buttons[0].textContent).to.equal('broadcast');
-    expect(buttons[1].textContent).to.equal('go');
+    
+    // there is a button to add in later release.
+    // expect(buttons[1].textContent).to.equal('go');
   });
  
 

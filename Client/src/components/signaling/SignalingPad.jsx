@@ -17,7 +17,7 @@ export default React.createClass({
 			</div>
 		    <div className="SignalingPad_column">
 			    <button className="signalingPad__action">broadcast</button>
-			    <button className="signalingPad__action">go</button>
+			    
 			</div>
 				<textarea className="signalingPad__textArea" 
 					placeholder="Signal..." 
@@ -26,3 +26,7 @@ export default React.createClass({
 		    </div>;
 	}
 });
+
+
+// add button later. 
+// <button className="signalingPad__action">go</button>
