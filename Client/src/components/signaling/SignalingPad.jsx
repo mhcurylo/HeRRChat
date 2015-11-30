@@ -6,6 +6,15 @@ import {writePad} from '../../actions/actions.js';
 
 export default React.createClass({
 	mixins: [PureRenderMixin],
+	buttonClick() {
+		if (this.props.noise !== '') {
+			if (this.props.name !== '') {
+				this.props.broadcastSignal(his.props.noise, this.props.url);
+			} else {
+				this.props.broadcastName(this.props.noise, this.props.name, this.props.url );
+			}
+		}
+	},
 	handleChange(e) {
     	this.props.writePad(e.target.value);
     },
@@ -16,7 +25,7 @@ export default React.createClass({
 			    	'Enter your name and broadcast it.'}</h4>
 			</div>
 		    <div className="SignalingPad_column">
-			    <button className="signalingPad__action">broadcast</button>
+			    <button onClick={this.buttonClick} className="signalingPad__action">broadcast</button>
 			    
 			</div>
 				<textarea className="signalingPad__textArea" 
