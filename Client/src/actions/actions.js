@@ -7,6 +7,13 @@ export function writePad (noise) {
     };
 }
 
+export function setSid (sid) {
+    return {
+        type: types.SET_SID,
+        sid
+    };
+}
+
 export function changeUrl (url) {
     return {
         meta: {remote: true},

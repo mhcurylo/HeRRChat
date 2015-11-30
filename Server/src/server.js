@@ -8,7 +8,9 @@ export default function startServer(store) {
 	);
 
 	io.on('connection', (socket) => {
-		socket.emit('state', store.getState().toJS());
-		socket.on('action', store.dispatch.bind(store));
+		//socket.on('action', store.dispatch.bind(store));
+		//io.sockets.socket(savedSocketId).emit(...)
+		socket.emit('id', socket.id);
+		console.log(socket.id);
 	});
 }

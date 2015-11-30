@@ -14,7 +14,8 @@ export const INITIAL_STATE =Map({
 	sourcesOrder: OrderedSet.of(),
 	url: '',
 	noise: '',
-	action: ''
+	action: '',
+	sid: ''
 })
 
 // const example = fromJS({

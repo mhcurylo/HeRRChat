@@ -1,7 +1,7 @@
 import {Map, Set, List} from 'immutable';
 
 export const INITIAL_STATE = Map({
-    users: Map({
+    sources: Map({
         'PrawdziwyKazio': Map({
             id: 'PrawdziwyKazio',
             spaces: Set.of()
@@ -10,12 +10,13 @@ export const INITIAL_STATE = Map({
     spaces: Map({
         'uhrSpace': Map({
             id: 'uhrSpace',
-            users: Set.of()
+            sources: Set.of()
         })
     }),
-    messages: List.of(Map({
+    signals: List.of(Map({
         receivers: Set.of('PrawdziwyKazio'),
-        sender: 'PrawdziwyKazio',
-        message: 'Wiadomość z próbowki'
+        source: 'PrawdziwyKazio',
+        signal: 'Wiadomość z próbowki',
+        space: '#/'
     }))
 });

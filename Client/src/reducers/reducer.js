@@ -19,6 +19,8 @@ export default function reducer (state=INITIAL_STATE, action) {
             return state.set('name', receiveName(action.name));
         case types.RECEIVE_SIGNAL:
             return receiveSignal(state);
+        case types.SET_SID:
+            return state.set('sid', action.sid);
         default:
             return state;
     }
