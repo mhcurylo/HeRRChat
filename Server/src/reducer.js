@@ -6,7 +6,7 @@ import {INITIAL_STATE} from './initial';
 export default function reducer (state=INITIAL_STATE, action)  {
     switch (action.type) {
     case 'BROADCAST_NAME':
-        return state.update('sources', sources => loginSource(sources, action.name, action.space));
+        return state.update('sources', sources => loginSource(sources, action.name, action.space, action.sid));
     case 'LOGOUT_USER':
         return state.update('users', users => logoutSource(users, action.user));
     case 'ADD_TO_SPACE':

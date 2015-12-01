@@ -1,18 +1,19 @@
 import {List, Map, Set} from 'immutable';
 
 
-export function loginSource(stateSources, name, space) {
+export function loginSource(stateSources, name, space, sid) {
     if (!stateSources.get(name)) {
 
-        return stateSources.set(name, 
+        return stateSources.set(sid, 
             Map({
-                id: name,
+                name: name,
+                sid: sid,
                 spaces: Set.of(space)
             }));
 
     } else {
 
-        return loginSource(stateSources, name+'_');
+        return loginSource(stateSources, name+'_', space, sid);
 
     }
 }

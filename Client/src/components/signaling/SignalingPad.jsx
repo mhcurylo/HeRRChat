@@ -9,9 +9,9 @@ export default React.createClass({
 	buttonClick() {
 		if (this.props.noise !== '') {
 			if (this.props.name !== '') {
-				this.props.broadcastSignal(his.props.noise, this.props.url);
+				this.props.broadcastSignal(this.props.noise, this.props.url, this.props.sid);
 			} else {
-				this.props.broadcastName(this.props.noise, this.props.name, this.props.url );
+				this.props.broadcastName(this.props.noise, this.props.url, this.props.sid);
 			}
 		}
 	},
