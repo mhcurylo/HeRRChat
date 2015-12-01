@@ -28,7 +28,7 @@ const Chat = React.createClass({
                 url = {this.props.url}
                 writePad = {this.props.writePad}
                 broadcastName = {this.props.broadcastName} 
-                broadcastSignal = {this.props.boradcastSignal}
+                broadcastSignal  = {this.props.broadcastSignal}
                 name = {this.props.name} 
                 noise={this.props.noise}/>
         </div>;

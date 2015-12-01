@@ -10,10 +10,11 @@ const socket = io(`${location.hostname}:8090`);
 let sid = '';
 
 
-socket.on('buhaha', state =>
-    console.log(state));
-socket.on('state', state =>
-    console.log(state));
+socket.on('action', action => {
+			console.log('action', action);
+    		store.dispatch(action);
+    	});
+
 socket.on('id', id => {
 			sid = id;
 			console.log('id', sid);

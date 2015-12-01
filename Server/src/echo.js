@@ -1,15 +1,22 @@
 
-const RECIVE_NAME = function (action, store) {
-	return store.getState().toJS();
+const RECEIVE_NAME = function (action, store) {
+	return {
+		type: 'RECEIVE_NAME',
+		name: store.getState().getIn(['sources', action.sid, 'name'])
+	}
 }
 
 
-export function echo (action, store, io) {
-	switch(action.type) {
-		case 'BROADCAST_NAME':
-			io.to(action.sid).emit('buhaha', RECIVE_NAME(action, store));
-			break;
-		default:
-			console.log('sumfink else');
+export function ether (store, io) {
+
+	return function echo (action) { 
+		switch(action.type) {
+			case 'BROADCAST_NAME':
+				io.to(action.sid).emit('action', RECEIVE_NAME(action, store));
+				break;
+			default:
+				console.log('sumfink else');
+		}
 	}
+
 }
