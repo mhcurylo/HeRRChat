@@ -1,4 +1,3 @@
-
 const RECEIVE_NAME = function (action, store) {
 	return {
 		type: 'RECEIVE_NAME',
@@ -7,16 +6,16 @@ const RECEIVE_NAME = function (action, store) {
 }
 
 
-export function ether (store, io) {
-
-	return function echo (action) { 
-		switch(action.type) {
+export default function (store, io, action) {
+	
+	switch(action.type) {
 			case 'BROADCAST_NAME':
 				io.to(action.sid).emit('action', RECEIVE_NAME(action, store));
 				break;
 			default:
-				console.log('sumfink else');
-		}
+				console.log('sumfink else, post');
 	}
 
+	return action;
 }
+

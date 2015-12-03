@@ -1,20 +1,23 @@
 import Server from 'socket.io';
-import {ether} from './echo';
+import sandwich from './sandwich';
+import ioDispatch from './ioDispatch';
+import preDispatcher from './preDispatcher';
+import postDispatcher from './postDispatcher';
+
 
 export default function startServer(store) {
-	const io = new Server().attach(8090);
-	const echo = ether(store, io);
 
-	// store.subscribe(
-	// 	() =>{ 
-	// 		io.emit('state',
-	// 		store.getState().toJS());
-	// 	}
-	// );
+	const io = new Server().attach(8090);
+
+	const postDispatch = ioDispatch(store, io, postDispatcher);
+	
+	const preDispatch = ioDispatch(store, io, preDispatcher);
+
+	const chow = sandwich(store, postDispatch, preDispatch);
 
 	io.on('connection', (socket) => {
 		socket.on('action', action => {
-							echo(store.dispatch(action));
+							chow(action);
 						});
 		//io.sockets.socket(savedSocketId).emit(...)
 		socket.emit('id', socket.id);
