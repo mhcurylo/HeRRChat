@@ -26,6 +26,7 @@ const Chat = React.createClass({
             <SignalingPad 
                 sid = {this.props.sid}
                 url = {this.props.url}
+                spacesOrder={this.props.spacesOrder} 
                 writePad = {this.props.writePad}
                 broadcastName = {this.props.broadcastName} 
                 broadcastSignal  = {this.props.broadcastSignal}

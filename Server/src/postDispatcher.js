@@ -1,7 +1,9 @@
 const RECEIVE_NAME = function (action, store) {
+	const source =  store.getState().getIn(['sources', action.sid]);
 	return {
 		type: 'RECEIVE_NAME',
-		name: store.getState().getIn(['sources', action.sid, 'name'])
+		name: source.get('name'),
+		spaces: source.get('spaces').toArray
 	}
 }
 

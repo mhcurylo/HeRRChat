@@ -1,6 +1,5 @@
 import {loginSource, logoutSource} from './functions/log';
 import {addToSpace, removeFromSpace} from './functions/space';
-import {newMessage} from './functions/msg';
 import {INITIAL_STATE} from './initial';
 
 export default function reducer (state=INITIAL_STATE, action)  {
@@ -13,10 +12,6 @@ export default function reducer (state=INITIAL_STATE, action)  {
         return addToSpace(state, action.user, action.space);
     case 'REMOVE_FROM_SPACE':
         return removeFromSpace(state, action.user, action.space);
-    case 'NEW_MESSAGE':
-        return state.update('messages', messages => 
-                                newMessage(messages, 
-                                    state.get('spaces'), action.message));
     default:
         return state;
     }

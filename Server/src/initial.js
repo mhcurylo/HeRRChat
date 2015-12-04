@@ -12,11 +12,5 @@ export const INITIAL_STATE = Map({
             id: 'uhrSpace',
             sources: Set.of()
         })
-    }),
-    signals: List.of(Map({
-        receivers: Set.of('PrawdziwyKazio'),
-        source: 'PrawdziwyKazio',
-        signal: 'Wiadomość z próbowki',
-        space: '#/'
-    }))
+    })
 });

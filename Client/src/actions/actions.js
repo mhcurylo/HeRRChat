@@ -22,20 +22,14 @@ export function changeUrl (url) {
     };
 }
 
-export function broadcastName (name, space, sid) {
+export function broadcastName (name, space, sid, spacesOrder) {
     return {
         meta: {remote: true},
         type: types.BROADCAST_NAME,
         name,
         space,
-        sid
-    };
-}
-
-export function receiveName (name) {
-    return {
-        type: types.RECIEVE_NAME,
-        name
+        sid,
+        spacesOrder
     };
 }
 

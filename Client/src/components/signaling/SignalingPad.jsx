@@ -9,11 +9,14 @@ export default React.createClass({
 	buttonClick() {
 		if (this.props.noise !== '') {
 			if (this.props.name !== '') {
-				this.props.broadcastSignal(this.props.noise, this.props.url, this.props.sid);
+				this.props.broadcastSignal(this.props.noise, 
+					this.props.url, this.props.sid);
 			} else {
-				this.props.broadcastName(this.props.noise, this.props.url, this.props.sid);
+				this.props.broadcastName(this.props.noise, 
+					this.props.url, this.props.sid, this.props.spacesOrder);
 			}
 		}
+		this.props.writePad('');
 	},
 	handleChange(e) {
     	this.props.writePad(e.target.value);
