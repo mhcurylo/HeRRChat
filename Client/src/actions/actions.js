@@ -34,22 +34,13 @@ export function broadcastName (name, space, sid, spacesOrder) {
 }
 
 
-export function broadcastSignal (signal, source, space, sid) {
+export function broadcastSignal (signal, space, sid) {
     return {
         meta: {remote: true},
         type: types.BROADCAST_SIGNAL,
         signal,
-        source,
         space,
         sid
     };
 }
 
-export function receiveSignal (signal, source, space) {
-    return {
-        type: types.RECIEVE_SIGNAL,
-        signal,
-        source,
-        space
-    };
-}
