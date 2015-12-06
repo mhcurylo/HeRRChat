@@ -1,5 +1,12 @@
 import * as types from '../constants/constants';
 
+export function setFilter (url) {
+    return {
+        type: types.SET_FILTER,
+        url
+    }
+}
+
 export function writePad (noise) {
     return {
         type: types.WRITE_PAD,
@@ -14,7 +21,7 @@ export function setSid (sid) {
     };
 }
 
-export function changeUrl (url) {
+export function brodcastUrl (url) {
     return {
         meta: {remote: true},
         type: types.CHANGE_URL,
@@ -22,17 +29,15 @@ export function changeUrl (url) {
     };
 }
 
-export function broadcastName (name, space, sid, spacesOrder) {
+export function broadcastName (name, space, sid) {
     return {
         meta: {remote: true},
         type: types.BROADCAST_NAME,
         name,
         space,
-        sid,
-        spacesOrder
+        sid
     };
 }
-
 
 export function broadcastSignal (signal, space, sid) {
     return {

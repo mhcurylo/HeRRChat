@@ -23,11 +23,11 @@ export default React.createClass({
     },
 	render: function() {
 	    return <div className="chat__element chat__signalingPad">
-		    <div className="signalingPad_column">
+		    <div className="column--1of2">
 			    <h4>{this.props.name ||
 			    	'Enter your name and broadcast it.'}</h4>
 			</div>
-		    <div className="signalingPad_column">
+		    <div className="column--1of2">
 			    <button onClick={this.buttonClick} className="signalingPad__action">broadcast</button>
 			    
 			</div>

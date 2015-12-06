@@ -7,8 +7,7 @@ export default React.createClass({
 	mixins: [PureRenderMixin],
   	render: function() {
 
-	    return 	<li className={this.props.space === this.props.url ? 
-  			"spaces spaces--selected" : "spaces"}>
+	    return 	<li className="spaces">
 		    	 <Link to={this.props.space}>{this.props.space}</Link>
 	    	</li>;
   	}
