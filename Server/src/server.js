@@ -17,7 +17,7 @@ export default function startServer(store) {
 
 	io.on('connection', (socket) => {
 		socket.on('action', action => {
-							chow(action);
+							console.log(chow(action));
 						});
 		//io.sockets.socket(savedSocketId).emit(...)
 		socket.emit('id', socket.id);

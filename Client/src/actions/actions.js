@@ -29,12 +29,11 @@ export function broadcastUrl (url) {
     };
 }
 
-export function broadcastName (name, space, sid) {
+export function broadcastName (name, sid) {
     return {
         meta: {remote: true},
         type: types.BROADCAST_NAME,
         name,
-        space,
         sid
     };
 }

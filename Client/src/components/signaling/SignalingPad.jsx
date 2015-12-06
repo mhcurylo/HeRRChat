@@ -12,8 +12,7 @@ export default React.createClass({
 				this.props.broadcastSignal(this.props.noise, 
 					this.props.url, this.props.sid);
 			} else {
-				this.props.broadcastName(this.props.noise,
-					this.props.url, this.props.sid);
+				this.props.broadcastName(this.props.noise, this.props.sid);
 			}
 		}
 		this.props.writePad('');
