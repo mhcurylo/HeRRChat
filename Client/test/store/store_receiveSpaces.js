@@ -4,7 +4,7 @@ import * as types from '../../src/constants/constants';
 
 import {store} from '../../src/store/store';
 
-describe('Action+Store+Reducer/receiveSpaces', () => {
+describe('Store+Reducer/receiveSpaces', () => {
 
     it('sets the spaces according to data', () => {
 

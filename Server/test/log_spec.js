@@ -17,8 +17,7 @@ describe('login', () => {
             store.dispatch({type: 'BROADCAST_NAME', name: 'Józef', sid:'1234a'});
 
             expect(store.getState().getIn(['sources', '1234a'])).to.equal(fromJS({
-                name: 'Józef',
-                sid: '1234a'
+                name: 'Józef'
             }));
             expect(store.getState().get('names')).to.equal(Set.of('Józef'));
 
@@ -30,8 +29,7 @@ describe('login', () => {
             store.dispatch({type: 'BROADCAST_NAME', name: 'Józef', sid:'1235a'});
 
             expect(store.getState().getIn(['sources', '1235a'])).to.equal(fromJS({
-                name: 'Józef_',
-                sid: '1235a'
+                name: 'Józef_'
             }));
             expect(store.getState().get('names')).to.equal(Set.of('Józef', 'Józef_'));
 

@@ -1,3 +1,5 @@
+//import () from 'immutable';
+
 const RECEIVE_NAME = function (action, store) {
     return {
         type: 'RECEIVE_NAME',
@@ -14,10 +16,26 @@ const RECEIVE_SPACES = function (action, store) {
     }
 }
 
-const RECEIVE_SOURCES = function (action, store) {
+const RECEIVE_SOURCES = function (sourcesSids, store) {
+    let sources = [];
+    let sourcesImmutable = store.getState().get('sources');
+    sourcesSids.forEach((sid) => {
+        sources.push(sourcesImmutable.get(sid).toJS());
+    });
+
+    console.log('rs', sources);
+
+    return {
+        type: 'RECEIVE_SOURCES',
+        sources: sources
+    }
 
 }
 
+const broadcastChangeInSources = function (store, io, url) {
+    const sourcesSids = store.getState().getIn(['spaces', url, 'sources']);
+    io.to(sourcesSids.toArray('')).emit('action', RECEIVE_SOURCES(sourcesSids, store));
+};
 
 
 
@@ -29,9 +47,8 @@ export default function (store, io, action) {
                 io.to(action.sid).emit('action', RECEIVE_NAME(action, store));
                 break;
             case 'BROADCAST_URL':
-
-                console.log(RECEIVE_SPACES(action, store));
                 io.to(action.sid).emit('action', RECEIVE_SPACES(action, store));
+                broadcastChangeInSources(store, io, action.url);
                 break;
             default:
                 console.log('sumfink else, post');

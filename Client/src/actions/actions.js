@@ -34,7 +34,7 @@ export function broadcastName (name, sid) {
         meta: {remote: true},
         type: types.BROADCAST_NAME,
         name,
-        sid
+        // sid
     };
 }
 
@@ -44,7 +44,7 @@ export function broadcastSignal (signal, space, sid) {
         type: types.BROADCAST_SIGNAL,
         signal,
         space,
-        sid
+        // sid
     };
 }
 

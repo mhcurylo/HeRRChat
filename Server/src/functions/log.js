@@ -3,7 +3,7 @@ import {List, Map, Set} from 'immutable';
 
 export function loginSource(stateSources, name, sid, names) {
     if (!names.has(name)) {
-        return stateSources.set('name', name).set('sid', sid);
+        return stateSources.set('name', name);
 
     } else {
 

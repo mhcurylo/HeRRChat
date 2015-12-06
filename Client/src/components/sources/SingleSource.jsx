@@ -6,7 +6,7 @@ export default React.createClass({
     mixins: [PureRenderMixin],
     render: function() {
         return  <li className="source">
-                 {this.props.source} 
+                 {this.props.source.name} 
             </li>;
      
     }

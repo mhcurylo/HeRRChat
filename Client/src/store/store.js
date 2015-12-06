@@ -14,9 +14,7 @@ export const store = applyMiddleware(
 )(createStore)(reducer);
 
 socket.on('action', action => {
-    console.log('action', action);
-    console.log( action.spacesOrder)
-    action.spacesOrder = OrderedSet(action.spacesOrder);
+    console.log('rec', action);
     store.dispatch(action);
 });
 

@@ -21,7 +21,6 @@ const Chat = React.createClass({
                 url={this.props.url}/>
             <SourcesHolder
                 sources={this.props.sources}
-                sourcesSet = {this.props.sourcesSet}
                 url={this.props.url}/>
             <SignalingPad 
                 sid = {this.props.sid}
@@ -40,11 +39,9 @@ function mapStateToProps(state) {
         sid: state.get('sid'),
         signals: state.get('signals'),
         signalsFiltered: state.get('signalsFiltered'),
-        spaces: state.get('spaces'),
         spacesOrder: state.get('spacesOrder'),
         url: state.get('url'),
         sources: state.get('sources'),
-        sourcesSet: state.get('sourcesSet'),
         name: state.get('name'),
         noise: state.get('noise')
     };
