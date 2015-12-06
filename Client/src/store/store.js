@@ -14,15 +14,15 @@ export const store = applyMiddleware(
 )(createStore)(reducer);
 
 socket.on('action', action => {
-			console.log('action', action);
-            console.log( action.spacesOrder)
-            action.spacesOrder = OrderedSet(action.spacesOrder);
-    		store.dispatch(action);
-    	});
+    console.log('action', action);
+    console.log( action.spacesOrder)
+    action.spacesOrder = OrderedSet(action.spacesOrder);
+    store.dispatch(action);
+});
 
 socket.on('id', id => {
-			sid = id;
-			console.log('id', sid);
-			store.dispatch(setSid(id));
-	});
+        sid = id;
+        console.log('id', sid);
+        store.dispatch(setSid(id));
+});
 

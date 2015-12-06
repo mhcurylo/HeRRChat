@@ -7,4 +7,4 @@ export const RECEIVE_NAME       = 'RECEIVE_NAME';
 export const RECEIVE_SIGNAL     = 'RECEIVE_SIGNAL';
 export const RECEIVE_SPACES     = 'RECEIVE_SPACES';
 export const RECEIVE_SOURCES    = 'RECEIVE_SOURCES';
-export const SET_SID 			= 'SET_SID';
+export const SET_SID            = 'SET_SID';

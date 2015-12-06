@@ -24,4 +24,3 @@ export function removeFromSpace (state, sid, space) {
     return state.updateIn(['sources',sid,'spaces'], (spaces=OrderedSet()) => spaces.delete(space))
         .updateIn(['spaces', space, 'sources'], (sources=Set()) => sources.delete(sid));
 }
-

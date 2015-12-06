@@ -9,20 +9,20 @@ import createHashHistory from 'history/lib/createHashHistory';
 import {broadcastUrl } from '../actions/actions';
 
 let history = createHashHistory({
-	queryKey: false
+    queryKey: false
 });
 
 history.listen(location => store.dispatch(broadcastUrl(location.pathname)));
 
 const routes = <Route component={App}>
-	<Route path="*"  history={history} component={ChatContainer} />
+    <Route path="*"  history={history} component={ChatContainer} />
 </Route>;
 
 
 
 ReactDOM.render(
-	<Provider store={store}>
-    	<Router history={history}>{routes}</Router>
-	</Provider>,
-	document.getElementById('rrchc')
+    <Provider store={store}>
+        <Router history={history}>{routes}</Router>
+    </Provider>,
+    document.getElementById('rrchc')
 );

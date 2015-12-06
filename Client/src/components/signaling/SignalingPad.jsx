@@ -5,37 +5,37 @@ import {writePad} from '../../actions/actions.js';
 
 
 export default React.createClass({
-	mixins: [PureRenderMixin],
-	buttonClick() {
-		if (this.props.noise !== '') {
-			if (this.props.name !== '') {
-				this.props.broadcastSignal(this.props.noise, 
-					this.props.url, this.props.sid);
-			} else {
-				this.props.broadcastName(this.props.noise, this.props.sid);
-			}
-		}
-		this.props.writePad('');
-	},
-	handleChange(e) {
-    	this.props.writePad(e.target.value);
+    mixins: [PureRenderMixin],
+    buttonClick() {
+        if (this.props.noise !== '') {
+            if (this.props.name !== '') {
+                this.props.broadcastSignal(this.props.noise, 
+                    this.props.url, this.props.sid);
+            } else {
+                this.props.broadcastName(this.props.noise, this.props.sid);
+            }
+        }
+        this.props.writePad('');
     },
-	render: function() {
-	    return <div className="chat__element chat__signalingPad">
-		    <div className="column--1of2">
-			    <h4>{this.props.name ||
-			    	'Enter your name and broadcast it.'}</h4>
-			</div>
-		    <div className="column--1of2">
-			    <button onClick={this.buttonClick} className="signalingPad__action">broadcast</button>
-			    
-			</div>
-				<textarea className="signalingPad__textArea" 
-					placeholder="Signal..." 
-					value={this.props.noise}
-					onChange={this.handleChange}/>
-		    </div>;
-	}
+    handleChange(e) {
+        this.props.writePad(e.target.value);
+    },
+    render: function() {
+        return <div className="chat__element chat__signalingPad">
+            <div className="column--1of2">
+                <h4>{this.props.name ||
+                    'Enter your name and broadcast it.'}</h4>
+            </div>
+            <div className="column--1of2">
+                <button onClick={this.buttonClick} className="signalingPad__action">broadcast</button>
+                
+            </div>
+                <textarea className="signalingPad__textArea" 
+                    placeholder="Signal..." 
+                    value={this.props.noise}
+                    onChange={this.handleChange}/>
+            </div>;
+    }
 });
 
 
