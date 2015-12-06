@@ -18,10 +18,9 @@
 export default function (store, io, action) {
 	
 	switch(action.type) {
-		// case 'BROADCAST_SIGNAL':
-		// 	const receivers = store.getIn([]);
-		// 	io.to(action.sid).emit('action', RECEIVE_NAME(action, store));
-		// 	return;			
+            case 'BROADCAST_URL':
+                action.loggedSpaces = store.getState().getIn(['sources', action.sid, 'spacesOrder']);
+                break;		
 		default:
 			console.log('sumfink else, pre');
 	}

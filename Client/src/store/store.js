@@ -2,7 +2,7 @@ import {createStore, applyMiddleware} from 'redux';
 import reducer from '../reducers/reducer';
 import io from 'socket.io-client';
 import remoteMiddleware from '../middleware/middleware';
-import {fromJS} from 'immutable';
+import {fromJS, OrderedSet} from 'immutable';
 import {setSid} from '../actions/actions'
 
 const socket = io(`${location.hostname}:8090`);
@@ -15,7 +15,8 @@ export const store = applyMiddleware(
 
 socket.on('action', action => {
 			console.log('action', action);
-            action.spacesOrder = action.spacesOrder ? action.spacesOrder.fromJS : '';
+            console.log( action.spacesOrder)
+            action.spacesOrder = OrderedSet(action.spacesOrder);
     		store.dispatch(action);
     	});
 

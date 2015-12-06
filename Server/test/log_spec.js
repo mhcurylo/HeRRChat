@@ -13,7 +13,6 @@ describe('login', () => {
 
         it('adds if new name', () => {
 
-           
 
             store.dispatch({type: 'BROADCAST_NAME', name: 'Józef', sid:'1234a'});
 

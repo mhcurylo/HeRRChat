@@ -12,7 +12,9 @@ export default function reducer (state=INITIAL_STATE, action)  {
     case 'LOGOUT_SOURCE':
         return logoutSource(state, action.sid);
     case 'BROADCAST_URL':
-        return state;//addToSpace(state, action.user, action.space);
+        return addToSpace(state, action.sid, action.url);
+    case 'REMOVE_FROM_SPACE':
+        return removeFromSpace(state, action.sid, action.url);
     default:
         return state;
     }
