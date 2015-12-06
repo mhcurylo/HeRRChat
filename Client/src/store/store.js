@@ -9,9 +9,13 @@ const socket = io(`${location.hostname}:8090`);
 
 let sid = '';
 
+export const store = applyMiddleware(
+    remoteMiddleware(socket)
+)(createStore)(reducer);
 
 socket.on('action', action => {
 			console.log('action', action);
+            action.spacesOrder = action.spacesOrder ? action.spacesOrder.fromJS : '';
     		store.dispatch(action);
     	});
 
@@ -21,6 +25,3 @@ socket.on('id', id => {
 			store.dispatch(setSid(id));
 	});
 
-export const store = applyMiddleware(
-    remoteMiddleware(socket)
-)(createStore)(reducer);

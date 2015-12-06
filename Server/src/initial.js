@@ -1,6 +1,7 @@
-import {Map, Set, List} from 'immutable';
+import {Map, Set} from 'immutable';
 
 export const INITIAL_STATE = Map({
-    sources: Map({}),    
+    sources: Map({}),
+    names: Set(),
     spaces: Map({})
 });

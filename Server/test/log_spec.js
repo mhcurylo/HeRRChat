@@ -1,65 +1,52 @@
-import {List, Map, Set, fromJS} from 'immutable';
+import {fromJS, Set, Map} from 'immutable';
 import {expect} from 'chai';
 
-import {loginUser, logoutUser} from '../src/functions/log';
+import makeStore from '../src/store';
 
 describe('login', () => {
 
+    const store = makeStore();
+
     describe('logingUser', () => {
+
+ 
+
         it('adds if new name', () => {
 
-            const inStateUsers = Map();
-            const outStateUsers = loginUser(inStateUsers, 'Kazio');         
-            expect(outStateUsers).to.equal(Map({
-                'Kazio': Map({
-                    id: 'Kazio',
-                    spaces: Set.of()
-                })
+           
+
+            store.dispatch({type: 'BROADCAST_NAME', name: 'Józef', sid:'1234a'});
+
+            expect(store.getState().getIn(['sources', '1234a'])).to.equal(fromJS({
+                name: 'Józef',
+                sid: '1234a'
             }));
+            expect(store.getState().get('names')).to.equal(Set.of('Józef'));
 
-        });
+        })
 
-      it('changes name and ads if name already exists', () => {
-
-            const inStateUsers = Map({
-                'Kazio': Map({
-                    id: 'Kazio',
-                    spaces: Set.of()
-                })
-            });
+        it('change name and add if name exists', () => {
 
 
-            const outStateUsers = loginUser(inStateUsers, 'Kazio');    
-            expect(outStateUsers).to.equal(Map({
-               'Kazio': Map({
-                    id: 'Kazio',
-                    spaces: Set.of()
-                }),
-                'Kazio_': Map({
-                    id: 'Kazio_',
-                    spaces: Set.of()
-                })
+            store.dispatch({type: 'BROADCAST_NAME', name: 'Józef', sid:'1235a'});
+
+            expect(store.getState().getIn(['sources', '1235a'])).to.equal(fromJS({
+                name: 'Józef_',
+                sid: '1235a'
             }));
+            expect(store.getState().get('names')).to.equal(Set.of('Józef', 'Józef_'));
 
-        });
-
-
+        })
     });
 
     describe('logoutUser', () => {
 
-      it('removes user', () => {
+      it('removes user and name (basic for now)', () => {
 
-            const inStateUsers = Map({
-                'Kazio': Map({
-                    id: 'Kazio',
-                    spaceIds: Set.of()
-                })
-            });
-
-            const outStateUsers = logoutUser(inStateUsers, 'Kazio');    
-            expect(outStateUsers).to.equal(Map({
-            }));
+            store.dispatch({type: 'LOGOUT_SOURCE', sid:'1234a'});
+            store.dispatch({type: 'LOGOUT_SOURCE', sid:'1235a'});
+            expect(store.getState().getIn(['sources'])).to.equal(fromJS({}));
+            expect(store.getState().get('names')).to.equal(Set.of());
 
         });
 
