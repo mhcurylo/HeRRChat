@@ -6,13 +6,13 @@ import {Router, Route}  from 'react-router';
 import App from './App';
 import {ChatContainer} from '../components/Chat';
 import createHashHistory from 'history/lib/createHashHistory';
-import {changeUrl} from '../actions/actions';
+import {broadcastUrl } from '../actions/actions';
 
 let history = createHashHistory({
 	queryKey: false
 });
 
-history.listen(location => store.dispatch(changeUrl(location.pathname)));
+history.listen(location => store.dispatch(broadcastUrl(location.pathname)));
 
 const routes = <Route component={App}>
 	<Route path="*"  history={history} component={ChatContainer} />

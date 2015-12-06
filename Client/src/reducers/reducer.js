@@ -16,7 +16,7 @@ export default function reducer (state=INITIAL_STATE, action) {
         case types.RECEIVE_SIGNAL:
             return receiveSignal(state);
         case types.RECEIVE_SPACES:
-            return receiveSpaces(state);
+            return receiveSpaces(state, action.url, action.spacesOrder);
         case types.RECEIVE_SOURCES:
             return receiveSources(state);
         case types.SET_SID:

@@ -21,10 +21,10 @@ export function setSid (sid) {
     };
 }
 
-export function brodcastUrl (url) {
+export function broadcastUrl (url) {
     return {
         meta: {remote: true},
-        type: types.CHANGE_URL,
+        type: types.BROADCAST_URL,
         url
     };
 }
