@@ -16,20 +16,29 @@ const RECEIVE_SPACES = function (action, store) {
     }
 }
 
-const RECEIVE_SOURCES = function (sourcesSids, store) {
+const RECEIVE_SOURCES = function (sources) {
     return {
         type: 'RECEIVE_SOURCES',
-        sources: (sourcesSids = store.getState().get('sources')).toList().toJS()
+        sources: sources
     }
 
 }
 
 const broadcastChangeInSources = function (store, io, url) {
+
     const sourcesSids = store.getState().getIn(['spaces', url, 'sources']);
-    io.to(sourcesSids.toJS()).emit('action', RECEIVE_SOURCES(sourcesSids, store));
+    const sourcesStore = store.getState().get('sources');
+    const sources = sourcesSids.map(s => sourcesStore.get(s).toJS());
+
+    sourcesSids.forEach(s => io.to(s).emit('action', RECEIVE_SOURCES(sources)));
 };
 
-
+const broadcastChangeInName = function (store, io, action) {
+    const source = store.getState().getIn(['sources', action.sid]);
+    const spaces = source.get('spaces').add(source.get('url'));
+    console.log('s', spaces);
+    spaces.forEach(u => broadcastChangeInSources(store, io, u));
+}
 
 
 export default function (store, io, action) {
@@ -37,6 +46,7 @@ export default function (store, io, action) {
     switch(action.type) {
             case 'BROADCAST_NAME':
                 io.to(action.sid).emit('action', RECEIVE_NAME(action, store));
+                broadcastChangeInName(store, io, action);
                 break;
             case 'BROADCAST_URL':
                 io.to(action.sid).emit('action', RECEIVE_SPACES(action, store));

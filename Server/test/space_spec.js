@@ -78,7 +78,7 @@ describe('broadcast_url', () => {
    
     });
 
-    describe('delete source', () => {
+    describe('delete source from space', () => {
 
  
         it('removes source and url, as in previous test.', () => {
