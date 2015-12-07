@@ -7,6 +7,6 @@ export function receiveSignal (state, action) {
         signal: action.signal,
         source: action.source,
         space: action.space
-    })).update('signalsOrder', so => so.push(id))
-        .update('signalsFiltered', sf => sf.push(id));
+    })).update('signalsOrder', so => so.unshift(id))
+        .update('signalsFiltered', sf => sf.unshift(id));
 }

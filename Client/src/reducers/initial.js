@@ -1,11 +1,11 @@
-import {Map, OrderedSet, List} from 'immutable';
+import {Map, OrderedSet, Stack, List} from 'immutable';
 
 export const INITIAL_STATE =Map({
     signals: Map({}),
     sources: List.of(),
     name: '',
-    signalsFiltered: List.of(),
-    signalsOrder: List.of(),
+    signalsFiltered: Stack.of(),
+    signalsOrder: Stack.of(),
     spacesOrder: OrderedSet.of(),
     url: '',
     noise: '',
