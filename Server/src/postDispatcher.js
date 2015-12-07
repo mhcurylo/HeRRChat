@@ -30,7 +30,9 @@ const broadcastChangeInSources = function (store, io, url) {
     const sourcesStore = store.getState().get('sources');
     const sources = sourcesSids.map(s => sourcesStore.get(s).toJS());
 
-    sourcesSids.forEach(s => io.to(s).emit('action', RECEIVE_SOURCES(sources)));
+    const signal = RECEIVE_SOURCES(sources);
+
+    sourcesSids.forEach(s => io.to(s).emit('action', signal));
 };
 
 const broadcastChangeInName = function (store, io, action) {
