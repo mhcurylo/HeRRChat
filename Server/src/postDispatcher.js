@@ -17,17 +17,16 @@ const RECEIVE_SPACES = function (action, store) {
 }
 
 const RECEIVE_SOURCES = function (sourcesSids, store) {
-    
     return {
         type: 'RECEIVE_SOURCES',
-        sources: (sourcesSids = store.getState().get('sources')).forEach(s => s.toJS());
+        sources: (sourcesSids = store.getState().get('sources')).toList().toJS()
     }
 
 }
 
 const broadcastChangeInSources = function (store, io, url) {
-    const sourcesSids = store.getState().getIn(['spaces', url, 'sources']).toArray;
-    io.to(sourcesSids).emit('action', RECEIVE_SOURCES(sourcesSids, store));
+    const sourcesSids = store.getState().getIn(['spaces', url, 'sources']);
+    io.to(sourcesSids.toJS()).emit('action', RECEIVE_SOURCES(sourcesSids, store));
 };
 
 
