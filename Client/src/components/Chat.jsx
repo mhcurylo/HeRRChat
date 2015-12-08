@@ -14,14 +14,12 @@ const Chat = React.createClass({
     render: function() {
         return <div className="chat">
             <SignalsHolder 
-                signals={this.props.signals} 
-                signalsFiltered={this.props.signalsFiltered}/>
+                signals={this.props.signals.get(this.props.url)}/>
             <SpacesHolder
                 spacesOrder={this.props.spacesOrder}
                 url={this.props.url}/>
             <SourcesHolder
-                sources={this.props.sources}
-                url={this.props.url}/>
+                sources={this.props.sources.get(this.props.url)}/>
             <SignalingPad 
                 sid = {this.props.sid}
                 url = {this.props.url}
@@ -29,7 +27,7 @@ const Chat = React.createClass({
                 broadcastName = {this.props.broadcastName} 
                 broadcastSignal  = {this.props.broadcastSignal}
                 name = {this.props.name} 
-                noise={this.props.noise}/>
+                noise = {this.props.noise}/>
         </div>;
 }
 });
@@ -38,10 +36,9 @@ function mapStateToProps(state) {
     return {
         sid: state.get('sid'),
         signals: state.get('signals'),
-        signalsFiltered: state.get('signalsFiltered'),
+        sources: state.get('sources'),
         spacesOrder: state.get('spacesOrder'),
         url: state.get('url'),
-        sources: state.get('sources'),
         name: state.get('name'),
         noise: state.get('noise')
     };

@@ -16,10 +16,11 @@ const RECEIVE_SPACES = function (action, store) {
     }
 }
 
-const RECEIVE_SOURCES = function (sources) {
+const RECEIVE_SOURCES = function (sources, url) {
     return {
         type: 'RECEIVE_SOURCES',
-        sources: sources
+        sources: sources,
+        space: url
     }
 
 }
@@ -30,7 +31,7 @@ const broadcastChangeInSources = function (store, io, url) {
     const sourcesStore = store.getState().get('sources');
     const sources = sourcesSids.map(s => sourcesStore.get(s).toJS());
 
-    const signal = RECEIVE_SOURCES(sources);
+    const signal = RECEIVE_SOURCES(sources, url);
 
     sourcesSids.forEach(s => io.to(s).emit('action', signal));
 };

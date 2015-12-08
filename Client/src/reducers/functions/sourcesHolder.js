@@ -1,4 +1,3 @@
-export function receiveSources (state, sources) {
-    
-    return state;
+export function receiveSources (sources) {
+    return sources;
 }

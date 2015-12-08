@@ -2,11 +2,9 @@ import {Map, OrderedSet, Stack, List} from 'immutable';
 
 export const INITIAL_STATE =Map({
     signals: Map({}),
-    sources: List.of(),
-    name: '',
-    signalsFiltered: Stack.of(),
-    signalsOrder: Stack.of(),
+    sources: Map({}),
     spacesOrder: OrderedSet.of(),
+    name: '',
     url: '',
     noise: '',
     action: '',

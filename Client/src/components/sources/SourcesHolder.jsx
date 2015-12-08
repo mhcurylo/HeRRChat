@@ -9,8 +9,8 @@ export default React.createClass({
         return <div className="chat__element chat__sources">
             <h4>Sources</h4>
             <ul className="sources">
-                {this.props.sources.map(source =>
-                     <SingleSource source={source}/>)}
+            {this.props.sources ? this.props.sources.map(source =>
+                 <SingleSource source={source}/>) : ''}
             </ul>
         </div>;
     }

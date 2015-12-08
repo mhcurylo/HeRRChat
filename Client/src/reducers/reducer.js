@@ -1,10 +1,9 @@
-import {Map, List} from 'immutable';
+import {Map, Stack, List, fromJS, OrderedSet} from 'immutable';
 import {writePad, receiveName} from './functions/signalingpad';
 import {receiveSignal} from './functions/signalsHolder';
 import {receiveSpaces} from './functions/spacesHolder';
 import {receiveSources} from './functions/sourcesHolder';
 import {INITIAL_STATE} from './initial';
-import {fromJS, OrderedSet} from 'immutable';
 import * as types from '../constants/constants';
 
 export default function reducer (state=INITIAL_STATE, action) {
@@ -16,11 +15,12 @@ export default function reducer (state=INITIAL_STATE, action) {
         case types.RECEIVE_NAME:
             return state.set('name', receiveName(action.name));
         case types.RECEIVE_SIGNAL:
-            return receiveSignal(state, action);
+            return state.updateIn(['signals', action.space], (s = List()) => receiveSignal(s, action));
         case types.RECEIVE_SPACES:
             return receiveSpaces(state, action.url, OrderedSet(action.spacesOrder));
         case types.RECEIVE_SOURCES:
-            return receiveSources(state, fromJS(action.sources));
+            console.log(state.get('sources').toJS());
+            return state.setIn(['sources', action.space], receiveSources(fromJS(action.sources)));
         case types.SET_SID:
             return state.set('sid', action.sid);
         default:
