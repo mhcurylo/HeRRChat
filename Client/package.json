@@ -1,7 +1,12 @@
 {
-  "name": "rrchatclient",
-  "version": "0.0.1",
-  "description": "A client app for RRChat",
+  "name": "herrchatclient",
+  "version": "0.1.1",
+  "description": "A client app for HeRRChat, a React ReduxChat",
+  "license" : "MIT",
+  "repository" :
+  { "type" : "git",
+     "url" : "https://github.com/mhcurylo/HeRRChat/"
+  }, 
   "main": "no",
   "scripts": {
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js 'test/**/*.@(js|jsx)'",
