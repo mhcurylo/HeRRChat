@@ -10,7 +10,7 @@ export default React.createClass({
             <h4>Sources</h4>
             <ul className="sources">
             {this.props.sources ? this.props.sources.map(source =>
-                 <SingleSource source={source}/>) : ''}
+                 <SingleSource key={source.get('id')} source={source}/>) : ''}
             </ul>
         </div>;
     }

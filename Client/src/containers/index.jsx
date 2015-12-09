@@ -18,6 +18,7 @@ const routes = <Route component={App}>
     <Route path="*"  history={history} component={ChatContainer} />
 </Route>;
 
+console.log(history);
 
 
 ReactDOM.render(

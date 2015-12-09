@@ -4,6 +4,7 @@ export function receiveSignal (signal, action) {
     return signal.unshift(Map({
         signal: action.signal,
         source: action.source,
-        space: action.space
+        space: action.space,
+        id: signal.size
     }));
 }

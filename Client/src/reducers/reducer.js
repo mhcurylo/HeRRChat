@@ -20,7 +20,7 @@ export default function reducer (state=INITIAL_STATE, action) {
             return receiveSpaces(state, action.url, OrderedSet(action.spacesOrder));
         case types.RECEIVE_SOURCES:
             console.log(state.get('sources').toJS());
-            return state.setIn(['sources', action.space], receiveSources(fromJS(action.sources)));
+            return state.setIn(['sources', action.space], receiveSources(action.sources));
         case types.SET_SID:
             return state.set('sid', action.sid);
         default:

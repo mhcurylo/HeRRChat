@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b1de6c7fb5c343f798d4"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "6bf0172d177a241419d9"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -29228,11 +29228,15 @@
 	        case types.RECEIVE_NAME:
 	            return state.set('name', (0, _signalingpad.receiveName)(action.name));
 	        case types.RECEIVE_SIGNAL:
-	            return (0, _signalsHolder.receiveSignal)(state, action);
+	            return state.updateIn(['signals', action.space], function () {
+	                var s = arguments.length <= 0 || arguments[0] === undefined ? (0, _immutable.List)() : arguments[0];
+	                return (0, _signalsHolder.receiveSignal)(s, action);
+	            });
 	        case types.RECEIVE_SPACES:
 	            return (0, _spacesHolder.receiveSpaces)(state, action.url, (0, _immutable.OrderedSet)(action.spacesOrder));
 	        case types.RECEIVE_SOURCES:
-	            return (0, _sourcesHolder.receiveSources)(state, (0, _immutable.fromJS)(action.sources));
+	            console.log(state.get('sources').toJS());
+	            return state.setIn(['sources', action.space], (0, _sourcesHolder.receiveSources)((0, _immutable.fromJS)(action.sources)));
 	        case types.SET_SID:
 	            return state.set('sid', action.sid);
 	        default:
@@ -34373,18 +34377,12 @@
 
 	var _immutable = __webpack_require__(264);
 
-	function receiveSignal(state, action) {
-	    var id = state.get('signals').size;
-	    return state.setIn(['signals', id], (0, _immutable.Map)({
-	        id: id,
+	function receiveSignal(signal, action) {
+	    return signal.unshift((0, _immutable.Map)({
 	        signal: action.signal,
 	        source: action.source,
 	        space: action.space
-	    })).update('signalsOrder', function (so) {
-	        return so.unshift(id);
-	    }).update('signalsFiltered', function (sf) {
-	        return sf.unshift(id);
-	    });
+	    }));
 	}
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(266); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "signalsHolder.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -34416,15 +34414,15 @@
 
 	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(77), RootInstanceProvider = __webpack_require__(85), ReactMount = __webpack_require__(87), React = __webpack_require__(139); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 	exports.receiveSources = receiveSources;
-	function receiveSources(state, sources) {
-
-	    return state;
+	function receiveSources(sources) {
+	    console.log('soruces', sources.toJS());
+	    return sources;
 	}
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(266); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "sourcesHolder.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -34447,11 +34445,9 @@
 
 	var INITIAL_STATE = exports.INITIAL_STATE = (0, _immutable.Map)({
 	    signals: (0, _immutable.Map)({}),
-	    sources: _immutable.List.of(),
-	    name: '',
-	    signalsFiltered: _immutable.Stack.of(),
-	    signalsOrder: _immutable.Stack.of(),
+	    sources: (0, _immutable.Map)({}),
 	    spacesOrder: _immutable.OrderedSet.of(),
+	    name: '',
 	    url: '',
 	    noise: '',
 	    action: '',
@@ -46565,14 +46561,12 @@
 	            'div',
 	            { className: 'chat' },
 	            _react2.default.createElement(_SignalsHolder2.default, {
-	                signals: this.props.signals,
-	                signalsFiltered: this.props.signalsFiltered }),
+	                signals: this.props.signals.get(this.props.url) }),
 	            _react2.default.createElement(_SpacesHolder2.default, {
 	                spacesOrder: this.props.spacesOrder,
 	                url: this.props.url }),
 	            _react2.default.createElement(_SourcesHolder2.default, {
-	                sources: this.props.sources,
-	                url: this.props.url }),
+	                sources: this.props.sources.get(this.props.url) }),
 	            _react2.default.createElement(_SignalingPad2.default, {
 	                sid: this.props.sid,
 	                url: this.props.url,
@@ -46589,10 +46583,9 @@
 	    return {
 	        sid: state.get('sid'),
 	        signals: state.get('signals'),
-	        signalsFiltered: state.get('signalsFiltered'),
+	        sources: state.get('sources'),
 	        spacesOrder: state.get('spacesOrder'),
 	        url: state.get('url'),
-	        sources: state.get('sources'),
 	        name: state.get('name'),
 	        noise: state.get('noise')
 	    };
@@ -46634,8 +46627,6 @@
 
 	    mixins: [_reactAddonsPureRenderMixin2.default],
 	    render: function render() {
-	        var _this = this;
-
 	        return _react2.default.createElement(
 	            'div',
 	            { className: 'chat__element chat__signals' },
@@ -46644,9 +46635,9 @@
 	                null,
 	                'Signals'
 	            ),
-	            this.props.signalsFiltered.map(function (signal) {
-	                return _react2.default.createElement(_SingleSignal2.default, { key: signal, signal: _this.props.signals.get(signal) });
-	            })
+	            this.props.signals ? this.props.signals.map(function (signal) {
+	                return _react2.default.createElement(_SingleSignal2.default, { signal: signal });
+	            }) : ''
 	        );
 	    }
 	});
@@ -46947,9 +46938,9 @@
 	            _react2.default.createElement(
 	                'ul',
 	                { className: 'sources' },
-	                this.props.sources.map(function (source) {
+	                this.props.sources ? this.props.sources.map(function (source) {
 	                    return _react2.default.createElement(_SingleSource2.default, { source: source });
-	                })
+	                }) : ''
 	            )
 	        );
 	    }
@@ -46988,7 +46979,7 @@
 	        return _react2.default.createElement(
 	            'li',
 	            { className: 'source' },
-	            this.props.source.name
+	            this.props.source.get('name')
 	        );
 	    }
 	});
@@ -47111,7 +47102,7 @@
 	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Inconsolata:400,700&subset=latin,latin-ext);", ""]);
 
 	// module
-	exports.push([module.id, "html {\n  font-family: sans-serif;\n  -ms-text-size-adjust: 100%;\n  -webkit-text-size-adjust: 100%;\n}\nbody {\n  margin: 0;\n}\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmain,\nnav,\nsection,\nsummary {\n  display: block;\n}\naudio,\ncanvas,\nprogress,\nvideo {\n  display: inline-block;\n  vertical-align: baseline;\n}\naudio:not([controls]) {\n  display: none;\n  height: 0;\n}\n[hidden],\ntemplate {\n  display: none;\n}\na {\n  background: transparent;\n}\na:active,\na:hover {\n  outline: 0;\n}\nabbr[title] {\n  border-bottom: 1px dotted;\n}\nb,\nstrong {\n  font-weight: bold;\n}\ndfn {\n  font-style: italic;\n}\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\nmark {\n  background: #ff0;\n  color: #000;\n}\nsmall {\n  font-size: 80%;\n}\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\nsup {\n  top: -0.5em;\n}\nsub {\n  bottom: -0.25em;\n}\nimg {\n  border: 0;\n}\nsvg:not(:root) {\n  overflow: hidden;\n}\nfigure {\n  margin: 1em 40px;\n}\nhr {\n  -moz-box-sizing: content-box;\n  box-sizing: content-box;\n  height: 0;\n}\npre {\n  overflow: auto;\n}\ncode,\nkbd,\npre,\nsamp {\n  font-family: monospace, monospace;\n  font-size: 1em;\n}\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  color: inherit;\n  font: inherit;\n  margin: 0;\n}\nbutton {\n  overflow: visible;\n}\nbutton,\nselect {\n  text-transform: none;\n}\nbutton,\nhtml input[type=\"button\"],\ninput[type=\"reset\"],\ninput[type=\"submit\"] {\n  -webkit-appearance: button;\n  cursor: pointer;\n}\nbutton[disabled],\nhtml input[disabled] {\n  cursor: default;\n}\nbutton::-moz-focus-inner,\ninput::-moz-focus-inner {\n  border: 0;\n  padding: 0;\n}\ninput {\n  line-height: normal;\n}\ninput[type=\"checkbox\"],\ninput[type=\"radio\"] {\n  box-sizing: border-box;\n  padding: 0;\n}\ninput[type=\"number\"]::-webkit-inner-spin-button,\ninput[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\ninput[type=\"search\"] {\n  -webkit-appearance: textfield;\n  -moz-box-sizing: content-box;\n  -webkit-box-sizing: content-box;\n  box-sizing: content-box;\n}\ninput[type=\"search\"]::-webkit-search-cancel-button,\ninput[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\nfieldset {\n  border: 1px solid #c0c0c0;\n  margin: 0 2px;\n  padding: 0.35em 0.625em 0.75em;\n}\nlegend {\n  border: 0;\n  padding: 0;\n}\ntextarea {\n  overflow: auto;\n}\noptgroup {\n  font-weight: bold;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\ntd,\nth {\n  padding: 0;\n}\nhtml {\n  box-sizing: border-box;\n}\n*,\n*:before,\n*:after {\n  box-sizing: inherit;\n}\ntextarea {\n  resize: none;\n  border: #002b36 solid 0.4rem;\n}\n.signalingPad__action {\n  font-size: 10px;\n  padding: 8px 17px;\n  border-radius: 2px;\n  background-color: #cb4b16;\n  color: #fff;\n  cursor: pointer;\n  font-weight: bold;\n  font-family: \"Helvetica Neue\", HelveticaNeue, Helvetica, Arial, sans-serif;\n  line-height: 1em;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  border: none;\n  -webkit-touch-callout: none;\n  user-select: none;\n  padding: 0.3rem;\n  margin: 0;\n  margin-bottom: 0.4rem;\n  margin-right: 0.3rem;\n  color: #eee8d5;\n  float: right;\n}\n.signalingPad__action:hover,\n.signalingPad__action:focus {\n  background-color: #c14715;\n  color: #f7f7f7;\n  border: none;\n}\n.signalingPad__action:active {\n  background-color: #b74414;\n}\n.signalingPad__action:hover {\n  background-color: #dc322f;\n}\n.signalingPad__action:active {\n  transform: scale(0.92);\n}\n.signalingPad__action:focus {\n  outline: none;\n}\n.signalingPad__textArea {\n  *zoom: 1;\n  width: auto;\n  max-width: 1440px;\n  float: none;\n  display: block;\n  margin-right: auto;\n  margin-left: auto;\n  padding-left: 0;\n  padding-right: 0;\n  width: 99%;\n  height: 4rem;\n  background: #002b36;\n  color: #eee8d5;\n  transition: all 3s ease;\n}\n.signalingPad__textArea:before,\n.signalingPad__textArea:after {\n  content: '';\n  display: table;\n}\n.signalingPad__textArea:after {\n  clear: both;\n}\n:focus {\n  outline: none;\n}\nblockquote {\n  border-left: 4px solid #6c71c4;\n  margin: 1em 0;\n  padding-left: 1.5em;\n}\nblockquote:after {\n  content: \"\";\n  display: table;\n  clear: both;\n}\nblockquote > p {\n  font-weight: 300;\n  font-size: 127%;\n  font-size: 1.27rem;\n  line-height: 127%;\n  line-height: 1.27rem;\n  margin-top: 0;\n}\nblockquote > cite,\nblockquote > footer,\nblockquote > figcaption {\n  color: #888;\n}\nblockquote > cite:before,\nblockquote > footer:before,\nblockquote > figcaption:before {\n  content: '\\2014';\n}\ncite {\n  color: #dc322f;\n}\n.sources {\n  margin: 0;\n  padding: 0;\n  color: #839496;\n}\n.sources:after {\n  content: \"\";\n  display: table;\n  clear: both;\n}\n.sources li {\n  float: left;\n  margin-right: 20px;\n  list-style-type: none;\n}\n.sources li:last-child {\n  margin-right: 0;\n}\n.spaces {\n  margin: 0;\n  padding: 0;\n  color: #839496;\n}\n.spaces:after {\n  content: \"\";\n  display: table;\n  clear: both;\n}\n.spaces li {\n  float: left;\n  margin-right: 20px;\n  list-style-type: none;\n}\n.spaces li:last-child {\n  margin-right: 0;\n}\n.spaces-url {\n  color: #6c71c4;\n  float: right;\n}\na {\n  text-decoration: none;\n  color: inherit;\n  transition: all .3s ease;\n}\na:hover {\n  color: #dc322f;\n}\n::-webkit-scrollbar {\n  width: 0.8rem;\n}\n::-webkit-scrollbar-track {\n  border-radius: 0.2rem;\n  background: #002b36;\n}\n::-webkit-scrollbar-thumb {\n  border-radius: 0.2rem;\n  background: #073642;\n}\n::-webkit-scrollbar-thumb:hover {\n  border-radius: 0.2rem;\n}\n::-webkit-scrollbar-thumb:hover:hover {\n  background-color: #dc322f;\n}\nbody {\n  background: #002b36;\n  font-family: 'Inconsolata';\n  line-height: 1rem;\n}\n.chat {\n  *zoom: 1;\n  width: auto;\n  max-width: 1440px;\n  float: none;\n  display: block;\n  margin-right: auto;\n  margin-left: auto;\n  padding-left: 0;\n  padding-right: 0;\n  max-width: 786px;\n  color: #93a1a1;\n}\n.chat:before,\n.chat:after {\n  content: '';\n  display: table;\n}\n.chat:after {\n  clear: both;\n}\n.chat__element {\n  border: 0.2em solid #cb4b16;\n  border-radius: 0.2em;\n  margin: 0.9em;\n  padding: 0.6em;\n  line-height: 1em;\n  font-size: 0.8em;\n  background: #073642;\n}\n.chat__element h4 {\n  position: relative;\n  margin-bottom: 0.8rem;\n  padding: 0em;\n  margin-top: 0.2em;\n  margin-left: -0.2em;\n  line-height: 0em;\n  color: #b58900;\n}\n.chat__signals {\n  height: 20em;\n  max-height: 20em;\n  overflow-y: auto;\n}\n.chat__spaces {\n  margin-bottom: 0em;\n  border-bottom: 0em none;\n  height: 3.4em;\n  max-height: 4em;\n}\n.chat__sources {\n  margin-top: -0.2em;\n  border-top: 0em none;\n  height: 5em;\n  max-height: 11em;\n}\n.column--1of2 {\n  *zoom: 1;\n  float: left;\n  clear: none;\n  text-align: inherit;\n  width: 50%;\n  margin-left: 0%;\n  margin-right: 0%;\n}\n.column--1of2:before,\n.column--1of2:after {\n  content: '';\n  display: table;\n}\n.column--1of2:after {\n  clear: both;\n}\n.column--1of1 {\n  *zoom: 1;\n  float: left;\n  clear: none;\n  text-align: inherit;\n  width: 100%;\n  margin-left: 0%;\n  margin-right: 0%;\n}\n.column--1of1:before,\n.column--1of1:after {\n  content: '';\n  display: table;\n}\n.column--1of1:after {\n  clear: both;\n}\n", ""]);
+	exports.push([module.id, "html {\n  font-family: sans-serif;\n  -ms-text-size-adjust: 100%;\n  -webkit-text-size-adjust: 100%;\n}\nbody {\n  margin: 0;\n}\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmain,\nnav,\nsection,\nsummary {\n  display: block;\n}\naudio,\ncanvas,\nprogress,\nvideo {\n  display: inline-block;\n  vertical-align: baseline;\n}\naudio:not([controls]) {\n  display: none;\n  height: 0;\n}\n[hidden],\ntemplate {\n  display: none;\n}\na {\n  background: transparent;\n}\na:active,\na:hover {\n  outline: 0;\n}\nabbr[title] {\n  border-bottom: 1px dotted;\n}\nb,\nstrong {\n  font-weight: bold;\n}\ndfn {\n  font-style: italic;\n}\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\nmark {\n  background: #ff0;\n  color: #000;\n}\nsmall {\n  font-size: 80%;\n}\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\nsup {\n  top: -0.5em;\n}\nsub {\n  bottom: -0.25em;\n}\nimg {\n  border: 0;\n}\nsvg:not(:root) {\n  overflow: hidden;\n}\nfigure {\n  margin: 1em 40px;\n}\nhr {\n  -moz-box-sizing: content-box;\n  box-sizing: content-box;\n  height: 0;\n}\npre {\n  overflow: auto;\n}\ncode,\nkbd,\npre,\nsamp {\n  font-family: monospace, monospace;\n  font-size: 1em;\n}\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  color: inherit;\n  font: inherit;\n  margin: 0;\n}\nbutton {\n  overflow: visible;\n}\nbutton,\nselect {\n  text-transform: none;\n}\nbutton,\nhtml input[type=\"button\"],\ninput[type=\"reset\"],\ninput[type=\"submit\"] {\n  -webkit-appearance: button;\n  cursor: pointer;\n}\nbutton[disabled],\nhtml input[disabled] {\n  cursor: default;\n}\nbutton::-moz-focus-inner,\ninput::-moz-focus-inner {\n  border: 0;\n  padding: 0;\n}\ninput {\n  line-height: normal;\n}\ninput[type=\"checkbox\"],\ninput[type=\"radio\"] {\n  box-sizing: border-box;\n  padding: 0;\n}\ninput[type=\"number\"]::-webkit-inner-spin-button,\ninput[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\ninput[type=\"search\"] {\n  -webkit-appearance: textfield;\n  -moz-box-sizing: content-box;\n  -webkit-box-sizing: content-box;\n  box-sizing: content-box;\n}\ninput[type=\"search\"]::-webkit-search-cancel-button,\ninput[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\nfieldset {\n  border: 1px solid #c0c0c0;\n  margin: 0 2px;\n  padding: 0.35em 0.625em 0.75em;\n}\nlegend {\n  border: 0;\n  padding: 0;\n}\ntextarea {\n  overflow: auto;\n}\noptgroup {\n  font-weight: bold;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\ntd,\nth {\n  padding: 0;\n}\nhtml {\n  box-sizing: border-box;\n}\n*,\n*:before,\n*:after {\n  box-sizing: inherit;\n}\ntextarea {\n  resize: none;\n  border: #002b36 solid 0.4rem;\n}\n.signalingPad__action {\n  font-size: 10px;\n  padding: 8px 17px;\n  border-radius: 2px;\n  background-color: #cb4b16;\n  color: #fff;\n  cursor: pointer;\n  font-weight: bold;\n  font-family: \"Helvetica Neue\", HelveticaNeue, Helvetica, Arial, sans-serif;\n  line-height: 1em;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  border: none;\n  -webkit-touch-callout: none;\n  user-select: none;\n  padding: 0.3rem;\n  margin: 0;\n  margin-bottom: 0.4rem;\n  margin-right: 0.3rem;\n  color: #eee8d5;\n  float: right;\n}\n.signalingPad__action:hover,\n.signalingPad__action:focus {\n  background-color: #c14715;\n  color: #f7f7f7;\n  border: none;\n}\n.signalingPad__action:active {\n  background-color: #b74414;\n}\n.signalingPad__action:hover {\n  background-color: #dc322f;\n}\n.signalingPad__action:active {\n  transform: scale(0.92);\n}\n.signalingPad__action:focus {\n  outline: none;\n}\n.signalingPad__textArea {\n  *zoom: 1;\n  width: auto;\n  max-width: 1440px;\n  float: none;\n  display: block;\n  margin-right: auto;\n  margin-left: auto;\n  padding-left: 0;\n  padding-right: 0;\n  width: 99%;\n  height: 4rem;\n  background: #002b36;\n  color: #eee8d5;\n}\n.signalingPad__textArea:before,\n.signalingPad__textArea:after {\n  content: '';\n  display: table;\n}\n.signalingPad__textArea:after {\n  clear: both;\n}\n:focus {\n  outline: none;\n}\nblockquote {\n  border-left: 4px solid #6c71c4;\n  margin: 1em 0;\n  padding-left: 1.5em;\n}\nblockquote:after {\n  content: \"\";\n  display: table;\n  clear: both;\n}\nblockquote > p {\n  font-weight: 300;\n  font-size: 127%;\n  font-size: 1.27rem;\n  line-height: 127%;\n  line-height: 1.27rem;\n  margin-top: 0;\n}\nblockquote > cite,\nblockquote > footer,\nblockquote > figcaption {\n  color: #888;\n}\nblockquote > cite:before,\nblockquote > footer:before,\nblockquote > figcaption:before {\n  content: '\\2014';\n}\ncite {\n  color: #dc322f;\n}\n.sources {\n  margin: 0;\n  padding: 0;\n  color: #839496;\n}\n.sources:after {\n  content: \"\";\n  display: table;\n  clear: both;\n}\n.sources li {\n  float: left;\n  margin-right: 20px;\n  list-style-type: none;\n}\n.sources li:last-child {\n  margin-right: 0;\n}\n.spaces {\n  margin: 0;\n  padding: 0;\n  color: #839496;\n}\n.spaces:after {\n  content: \"\";\n  display: table;\n  clear: both;\n}\n.spaces li {\n  float: left;\n  margin-right: 20px;\n  list-style-type: none;\n}\n.spaces li:last-child {\n  margin-right: 0;\n}\n.spaces-url {\n  color: #6c71c4;\n  float: right;\n}\na {\n  text-decoration: none;\n  color: inherit;\n  transition: all .3s ease;\n}\na:hover {\n  color: #dc322f;\n}\n::-webkit-scrollbar {\n  width: 0.8rem;\n}\n::-webkit-scrollbar-track {\n  border-radius: 0.2rem;\n  background: #002b36;\n}\n::-webkit-scrollbar-thumb {\n  border-radius: 0.2rem;\n  background: #073642;\n}\n::-webkit-scrollbar-thumb:hover {\n  border-radius: 0.2rem;\n}\n::-webkit-scrollbar-thumb:hover:hover {\n  background-color: #dc322f;\n}\nbody {\n  background: #002b36;\n  font-family: 'Inconsolata';\n  line-height: 1rem;\n}\n.chat {\n  *zoom: 1;\n  width: auto;\n  max-width: 1440px;\n  float: none;\n  display: block;\n  margin-right: auto;\n  margin-left: auto;\n  padding-left: 0;\n  padding-right: 0;\n  max-width: 786px;\n  color: #93a1a1;\n}\n.chat:before,\n.chat:after {\n  content: '';\n  display: table;\n}\n.chat:after {\n  clear: both;\n}\n.chat__element {\n  border: 0.2em solid #cb4b16;\n  border-radius: 0.2em;\n  margin: 0.9em;\n  padding: 0.6em;\n  line-height: 1em;\n  font-size: 0.8em;\n  background: #073642;\n}\n.chat__element h4 {\n  position: relative;\n  margin-bottom: 0.8rem;\n  padding: 0em;\n  margin-top: 0.2em;\n  margin-left: -0.2em;\n  line-height: 0em;\n  color: #b58900;\n}\n.chat__signals {\n  height: 20em;\n  max-height: 20em;\n  overflow-y: auto;\n}\n.chat__spaces {\n  margin-bottom: 0em;\n  border-bottom: 0em none;\n  height: 3.4em;\n  max-height: 4em;\n}\n.chat__sources {\n  margin-top: -0.2em;\n  border-top: 0em none;\n  height: 5em;\n  max-height: 11em;\n}\n.column--1of2 {\n  *zoom: 1;\n  float: left;\n  clear: none;\n  text-align: inherit;\n  width: 50%;\n  margin-left: 0%;\n  margin-right: 0%;\n}\n.column--1of2:before,\n.column--1of2:after {\n  content: '';\n  display: table;\n}\n.column--1of2:after {\n  clear: both;\n}\n.column--1of1 {\n  *zoom: 1;\n  float: left;\n  clear: none;\n  text-align: inherit;\n  width: 100%;\n  margin-left: 0%;\n  margin-right: 0%;\n}\n.column--1of1:before,\n.column--1of1:after {\n  content: '';\n  display: table;\n}\n.column--1of1:after {\n  clear: both;\n}\n", ""]);
 
 	// exports
 
