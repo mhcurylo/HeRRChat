@@ -8,11 +8,33 @@ import {ChatContainer} from '../components/Chat';
 import history from '../history/history';
 import {broadcastUrl } from '../actions/actions';
 
-history.listen(location => store.dispatch(broadcastUrl(location.pathname)));
+
+    let observer = history.listen(location => {
+        if (location.pathname === '/') {
+            history.push({
+                pathname: '/HeRRo!'
+            });
+        }
+    });
+
+    
+
+let listner = {
+    store: history.listen(
+        location => store.dispatch(broadcastUrl(location.pathname))
+    ),
+    home: history.listen(location => {
+        if (location.pathname === '/') {
+            history.push({
+                pathname: '/HeRRo!'
+            });
+        }
+    })
+}
+
 console.log(history);
-history.push({
-    pathname: '/HeRRo!'
-});
+
+
 
 const routes = <Route component={App}>
     <Route path="*"  history={history} component={ChatContainer} />
