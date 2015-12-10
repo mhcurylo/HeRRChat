@@ -5,7 +5,7 @@ import remoteMiddleware from '../middleware/remoteMiddleware';
 import historyMiddleware from '../middleware/historyMiddleware';
 import history from '../history/history';
 import {fromJS, OrderedSet} from 'immutable';
-import {setSid} from '../actions/actions'
+import {setSid, disconnect} from '../actions/actions'
 
 const socket = io(`${location.hostname}:8090`);
 
@@ -15,6 +15,8 @@ export const store = applyMiddleware(
     remoteMiddleware(socket),
     historyMiddleware(history)
 )(createStore)(reducer);
+
+// scoket.on(on('connect', () => store.dispatch(connected()))
 
 socket.on('action', action => {
     console.log('rec', action);
@@ -26,4 +28,6 @@ socket.on('id', id => {
         console.log('id', sid);
         store.dispatch(setSid(id));
 });
+
+socket.on('disconnect', () => {store.dispatch(disconnected())})
 

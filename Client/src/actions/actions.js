@@ -7,6 +7,13 @@ export function writePad (noise) {
     };
 }
 
+export function disconnect() {
+    return {
+        type: types.RECEIVE_NAME,
+        name: ''
+    }
+}
+
 export function setSid (sid) {
     return {
         type: types.SET_SID,

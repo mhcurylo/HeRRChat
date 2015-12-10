@@ -9,16 +9,6 @@ import history from '../history/history';
 import {broadcastUrl } from '../actions/actions';
 
 
-    let observer = history.listen(location => {
-        if (location.pathname === '/') {
-            history.push({
-                pathname: '/HeRRo!'
-            });
-        }
-    });
-
-    
-
 let listner = {
     store: history.listen(
         location => store.dispatch(broadcastUrl(location.pathname))
