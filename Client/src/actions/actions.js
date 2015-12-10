@@ -1,12 +1,5 @@
 import * as types from '../constants/constants';
 
-export function setFilter (url) {
-    return {
-        type: types.SET_FILTER,
-        url
-    }
-}
-
 export function writePad (noise) {
     return {
         type: types.WRITE_PAD,
@@ -19,6 +12,14 @@ export function setSid (sid) {
         type: types.SET_SID,
         sid
     };
+}
+export function goTo (url) {
+    console.log('goin')
+    return {
+        meta: 'changeUrl',
+        type: types.GO_TO,
+        url
+    }
 }
 
 export function broadcastUrl (url) {

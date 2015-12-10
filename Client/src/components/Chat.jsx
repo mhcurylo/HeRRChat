@@ -24,6 +24,7 @@ const Chat = React.createClass({
                 sid = {this.props.sid}
                 url = {this.props.url}
                 writePad = {this.props.writePad}
+                goTo = {this.props.goTo}
                 broadcastName = {this.props.broadcastName} 
                 broadcastSignal  = {this.props.broadcastSignal}
                 name = {this.props.name} 

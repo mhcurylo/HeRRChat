@@ -36,9 +36,7 @@ describe('SignalingPad...', () => {
 
     expect(buttons.length).to.equal(1);
     expect(buttons[0].textContent).to.equal('broadcast');
-    
-    // there is a button to add in later release.
-    // expect(buttons[1].textContent).to.equal('go');
+    expect(buttons[1].textContent).to.equal('go');
   });
  
 

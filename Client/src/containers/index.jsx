@@ -13,6 +13,10 @@ let history = createHashHistory({
 });
 
 history.listen(location => store.dispatch(broadcastUrl(location.pathname)));
+console.log(history);
+history.push({
+    pathname: '/HeRRo!'
+});
 
 const routes = <Route component={App}>
     <Route path="*"  history={history} component={ChatContainer} />

@@ -8,9 +8,14 @@ import * as types from '../constants/constants';
 
 export default function reducer (state=INITIAL_STATE, action) {
     switch (action.type) {
-        case types.SET_FILTER:
-            return setFilter(state);
         case types.WRITE_PAD:
+            return state.set('noise', writePad(action.noise));
+        case types.WRITE_PAD:
+            return state.set('noise', writePad(action.noise));
+        case types.BROADCAST_NAME:
+        case types.BROADCAST_SIGNAL:
+            return state.set('noise', '');
+        case types.BROADCAST_SIGNAL:
             return state.set('noise', writePad(action.noise));
         case types.RECEIVE_NAME:
             return state.set('name', receiveName(action.name));

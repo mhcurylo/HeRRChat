@@ -1,5 +1,6 @@
-export const SET_FILTER         = 'SET_FILTER';
+
 export const WRITE_PAD          = 'WRITE_PAD';
+export const GO_TO              = 'GO_TO';
 export const BROADCAST_URL      = 'BROADCAST_URL';
 export const BROADCAST_NAME     = 'BROADCAST_NAME';
 export const BROADCAST_SIGNAL   = 'BROADCAST_SIGNAL';
