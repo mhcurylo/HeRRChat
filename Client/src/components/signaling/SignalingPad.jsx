@@ -30,7 +30,7 @@ export default React.createClass({
             </div>
             <div className="column--1of2">
                 <button onClick={this.buttonSignal} className="signalingPad__action">broadcast</button>
-                <button onClick={this.buttonGoTo} className="signalingPad__action">go</button>
+                {this.props.name ? <button onClick={this.buttonGoTo} className="signalingPad__action">go</button> : ''}
             </div>
                 <textarea className="signalingPad__textArea" 
                     placeholder="Signal..." 

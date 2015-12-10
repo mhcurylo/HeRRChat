@@ -7,7 +7,7 @@ const {renderIntoDocument, scryRenderedDOMComponentsWithTag}
 
 describe('SignalingPad...', () => {
 
-  it('Well-behaves on no input,', () => {
+  it('Well-behaves on no name and noise,', () => {
     const component = renderIntoDocument(
       <SignalingPad name='' noise=''/> 
     );
@@ -16,9 +16,13 @@ describe('SignalingPad...', () => {
     const textarea = scryRenderedDOMComponentsWithTag(component, 'textarea');
     expect(h4[0].textContent).to.equal('Enter your name and broadcast it.');
     expect(textarea[0].textContent).to.equal('');
+    const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
+
+    expect(buttons.length).to.equal(1);
+    expect(buttons[0].textContent).to.equal('broadcast');
   });
 
-  it('...displays name and noise...', () => {
+  it('displays name and noise', () => {
     const component = renderIntoDocument(
       <SignalingPad name='Kapusta' noise='Kiszona'/> 
     );
@@ -28,13 +32,13 @@ describe('SignalingPad...', () => {
     expect(textarea[0].textContent).to.equal('Kiszona');
   });
 
-   it('...and has a button.', () => {
+   it('and has two buttons iff name.', () => {
     const component = renderIntoDocument(
-      <SignalingPad name='' noise=''/> 
+      <SignalingPad name='Name' noise=''/> 
     );
     const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
 
-    expect(buttons.length).to.equal(1);
+    expect(buttons.length).to.equal(2);
     expect(buttons[0].textContent).to.equal('broadcast');
     expect(buttons[1].textContent).to.equal('go');
   });
