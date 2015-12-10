@@ -10,8 +10,7 @@ export default function reducer (state=INITIAL_STATE, action) {
     switch (action.type) {
         case types.WRITE_PAD:
             return state.set('noise', writePad(action.noise));
-        case types.WRITE_PAD:
-            return state.set('noise', writePad(action.noise));
+        case types.GO_TO:
         case types.BROADCAST_NAME:
         case types.BROADCAST_SIGNAL:
             return state.set('noise', '');

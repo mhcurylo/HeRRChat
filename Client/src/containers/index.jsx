@@ -5,12 +5,8 @@ import {store} from '../store/store';
 import {Router, Route}  from 'react-router';
 import App from './App';
 import {ChatContainer} from '../components/Chat';
-import createHashHistory from 'history/lib/createHashHistory';
+import history from '../history/history';
 import {broadcastUrl } from '../actions/actions';
-
-let history = createHashHistory({
-    queryKey: false
-});
 
 history.listen(location => store.dispatch(broadcastUrl(location.pathname)));
 console.log(history);

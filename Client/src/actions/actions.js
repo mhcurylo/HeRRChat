@@ -16,7 +16,7 @@ export function setSid (sid) {
 export function goTo (url) {
     console.log('goin')
     return {
-        meta: 'changeUrl',
+        meta: {changeUrl: true},
         type: types.GO_TO,
         url
     }
