@@ -1,4 +1,4 @@
-//import () from 'immutable';
+import {Set} from 'immutable';
 
 const RECEIVE_NAME = function (action, store) {
     return {
@@ -29,16 +29,16 @@ const broadcastChangeInSources = function (store, io, url) {
 
     const sourcesSids = store.getState().getIn(['spaces', url, 'sources']);
     const sourcesStore = store.getState().get('sources');
-    const sources = sourcesSids.map(s => sourcesStore.get(s).toJS());
+    const sources = sourcesSids ? sourcesSids.map(s => sourcesStore.get(s).toJS()) : '';
 
     const signal = RECEIVE_SOURCES(sources, url);
 
-    sourcesSids.forEach(s => io.to(s).emit('action', signal));
+    sourcesSids ? sourcesSids.forEach(s => io.to(s).emit('action', signal)) : '';
 };
 
 const broadcastChangeInName = function (store, io, action) {
     const source = store.getState().getIn(['sources', action.sid]);
-    const spaces = source.get('spaces').add(source.get('url'));
+    const spaces = source.update('spaces', (s = Set()) => s.add(source.get('url')));
     console.log('s', spaces);
     spaces.forEach(u => broadcastChangeInSources(store, io, u));
 }

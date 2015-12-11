@@ -7,7 +7,7 @@ export function writePad (noise) {
     };
 }
 
-export function disconnect() {
+export function disconnected() {
     return {
         type: types.RECEIVE_NAME,
         name: ''

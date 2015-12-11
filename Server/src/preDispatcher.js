@@ -14,7 +14,7 @@ const broadcastSignal = function (store, io, action) {
 
     const signal = RECEIVE_SIGNAL(store.getState().getIn(['sources', action.sid, 'name']), action);
     
-    sourcesSids.forEach(s => io.to(s).emit('action', signal));
+    sourcesSids ? sourcesSids.forEach(s => io.to(s).emit('action', signal)) : '';
 
 };
 
