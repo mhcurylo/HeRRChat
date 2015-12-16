@@ -1,0 +1,14 @@
+{
+  	"extends": "airbnb",
+  	"ecmaFeatures": {
+	    "modules": true,
+	    "jsx": true
+  	},
+    "env": {
+        "mocha": true
+    },
+	"rules": {
+	    "quotes": [1, "single"],
+	    "no-unused-vars": 1
+	},
+}

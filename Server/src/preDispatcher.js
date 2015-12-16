@@ -1,36 +1,32 @@
-const RECEIVE_SIGNAL = function (name, action) {
-    return {
-        type: 'RECEIVE_SIGNAL',
-        source: name,
-        signal: action.signal,
-        space: action.space
-    }
-
+function receiveSignal(name, action) {
+  return {
+    type: 'RECEIVE_SIGNAL',
+    source: name,
+    signal: action.signal,
+    space: action.space };
 }
 
-const broadcastSignal = function (store, io, action) {
+function broadcastSignal(store, io, action) {
+  const sourcesSids = store.getState()
+                            .getIn(['spaces', action.space, 'sources']);
 
-    const sourcesSids = store.getState().getIn(['spaces', action.space, 'sources']);
+  const signal = receiveSignal(store.getState()
+                                    .getIn(['sources', action.sid, 'name']), action);
 
-    const signal = RECEIVE_SIGNAL(store.getState().getIn(['sources', action.sid, 'name']), action);
-    
-    sourcesSids ? sourcesSids.forEach(s => io.to(s).emit('action', signal)) : '';
-
-};
+  if (sourcesSids) {sourcesSids.forEach(s => io.to(s).emit('action', signal));}
+}
 
 
 export default function (store, io, action) {
-    
-    switch(action.type) {
-            case 'BROADCAST_URL':
-                action.loggedSpaces = store.getState().getIn(['sources', action.sid, 'spaces']);
-                break;   
-            case 'BROADCAST_SIGNAL':
-                broadcastSignal(store, io, action); 
-                break;   
-        default:
-            console.log('sumfink else, pre');
-    }
+  switch (action.type) {
+    case 'BROADCAST_URL':
+      action.loggedSpaces = store.getState().getIn(['sources', action.sid, 'spaces']);
+      break;
+    case 'BROADCAST_SIGNAL':
+      broadcastSignal(store, io, action);
+      break;
+    default:
+  }
 
-    return action;
+  return action;
 }
