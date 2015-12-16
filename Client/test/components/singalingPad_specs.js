@@ -1,15 +1,14 @@
 import React from 'react/addons';
 import SignalingPad from '../../src/components/signaling/SignalingPad';
-import {expect} from 'chai';
+import { expect } from 'chai';
 
-const {renderIntoDocument, scryRenderedDOMComponentsWithTag}
+const { renderIntoDocument, scryRenderedDOMComponentsWithTag }
   = React.addons.TestUtils;
 
 describe('SignalingPad...', () => {
-
   it('Well-behaves on no name and noise,', () => {
     const component = renderIntoDocument(
-      <SignalingPad name='' noise=''/> 
+      <SignalingPad name="" noise=""/>
     );
 
     const h4 = scryRenderedDOMComponentsWithTag(component, 'h4');
@@ -24,7 +23,7 @@ describe('SignalingPad...', () => {
 
   it('displays name and noise', () => {
     const component = renderIntoDocument(
-      <SignalingPad name='Kapusta' noise='Kiszona'/> 
+      <SignalingPad name="Kapusta" noise="Kiszona"/>
     );
     const h4 = scryRenderedDOMComponentsWithTag(component, 'h4');
     const textarea = scryRenderedDOMComponentsWithTag(component, 'textarea');
@@ -32,16 +31,14 @@ describe('SignalingPad...', () => {
     expect(textarea[0].textContent).to.equal('Kiszona');
   });
 
-   it('and has two buttons iff name.', () => {
+  it('and has two buttons iff name.', () => {
     const component = renderIntoDocument(
-      <SignalingPad name='Name' noise=''/> 
-    );
+      <SignalingPad name="Name" noise=""/>
+  );
     const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
 
     expect(buttons.length).to.equal(2);
     expect(buttons[0].textContent).to.equal('broadcast');
     expect(buttons[1].textContent).to.equal('go');
   });
- 
-
 });

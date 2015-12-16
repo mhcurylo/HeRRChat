@@ -1,6 +1,6 @@
-export function writePad (message){
-    return message;
+export function writePad(message) {
+  return message;
 }
-export function receiveName (name) {
-    return name;
+export function receiveName(name) {
+  return name;
 }
