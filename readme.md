@@ -2,16 +2,10 @@
 
 A simple react redux chat for HeRR and for FRRau.
 
-It is a working skeleton.
-
-I have to rethink the structure, write tests for redesign and re implement.
-
-In this moment there is NO memory management. Watch out when deploying or using for a long time.
+Made as an expriment with  redux/react/immutable.
 
 To check it out: in Server/ npm run start
-            in Client/ webpack-dev-server
-
-
+            in Client/ webpack-dev-server or webpack && serve
 
 Loosely Based upon the excellent full-stack redux-react tutorial:
 

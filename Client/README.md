@@ -4,4 +4,3 @@ A simple chat client written with React/Redux/Immutable.js and websockets.
 
 To checkout use webpack-dev-server or build using webpack.
 
-Very beta. No memory management yet, so watch out.

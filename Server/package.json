@@ -2,10 +2,10 @@
   "name": "herrserverclient",
   "version": "0.1.1",
   "description": "A server for HeRRChat, a React Redux Chat",
-  "license" : "MIT",
-  "repository" :
-  { "type" : "git",
-     "url" : "https://github.com/mhcurylo/HeRRChat/"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mhcurylo/HeRRChat/"
   },
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,6 @@
   },
   "keywords": [],
   "author": "",
-  "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.2.0",
     "babel-core": "^6.1.4",
